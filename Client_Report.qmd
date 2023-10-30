@@ -5,4 +5,16 @@ format: html
 editor: visual
 ---
 
-## 
+# Project Background
+
+# Data Cleaning/Organization
+
+# Methods
+
+The methods used to analyze the differences between each of the 22 tapes involve calculating distances between the tapes and visualizing their distances from each other. Distances were calculated using a combination of absolute differences as well as Hamming Loss distances. Visualization of these distances were generated using the methods of Multidimensional Scaling and K-means clustering.
+
+## Distances
+
+# Analysis
+
+# Conclusion
