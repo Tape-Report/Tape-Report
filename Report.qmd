@@ -5,4 +5,12 @@ format: html
 editor: visual
 ---
 
-## 
+# Project Background
+
+# Data Cleaning/Organization
+
+# Methods
+
+# Analysis
+
+# Conclusion
