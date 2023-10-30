@@ -286,6 +286,7 @@ ggscatter(mds, x = "Dim1", y = "Dim2",
           ellipse.type = "convex",
           repel = TRUE)
 
+row.names(data) <- c(seq(1, 6), seq(8, 23))
 fviz_cluster(k, data = data[2:15])
 
 ```
