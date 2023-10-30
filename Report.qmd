@@ -15,6 +15,7 @@ The methods used to analyze the differences between each of the 22 tapes involve
 
 ## Distances
 
+
 # Analysis
 
 # Conclusion
