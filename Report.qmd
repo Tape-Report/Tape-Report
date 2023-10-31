@@ -24,7 +24,6 @@ With $n=22$ different tapes, there are $\frac{n(n-1)}{2} = 231$ different pairs 
 ## Multidimensional Scaling
 
 
-
 # Analysis
 
 # Conclusion
