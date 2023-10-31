@@ -74,6 +74,62 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="data-cleaningorganization" class="level1">
 <h1>Data Cleaning/Organization</h1>
+<p>This part provides a concise summary of the data cleaning and organization steps for the four datasets: <code>width.csv</code>, <code>thickness.csv</code>, <code>stereo_phys.csv</code>, and <code>plm.csv</code>.</p>
+<section id="width.csv" class="level2">
+<h2 class="anchored" data-anchor-id="width.csv">width.csv</h2>
+<ol type="1">
+<li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>width</code>.</li>
+<li><strong>Column Removal</strong>: Averages and standard deviation columns were deleted.</li>
+<li><strong>Text Cleaning</strong>: “Tape” was removed from the <code>X</code> column.</li>
+<li><strong>Data Type Conversion</strong>: Values in columns 1-10 were converted to numeric.</li>
+<li><strong>Row Removal</strong>: Rows containing NAs and “tape 7” were removed.</li>
+<li><strong>Renaming Columns</strong>: Columns were renamed to a specific format.</li>
+<li><strong>Data Transformation</strong>: The dataset was reshaped to a longer format.</li>
+</ol>
+</section>
+<section id="thickness.csv" class="level2">
+<h2 class="anchored" data-anchor-id="thickness.csv">thickness.csv</h2>
+<ol type="1">
+<li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>thickness</code>.</li>
+<li><strong>Column Removal</strong>: Averages and standard deviation columns were deleted.</li>
+<li><strong>Text Cleaning</strong>: “Tape” was removed from the <code>X</code> column.</li>
+<li><strong>Data Type Conversion</strong>: Values in columns 1-10 were converted to numeric.</li>
+<li><strong>Row Removal</strong>: Rows containing NAs and “tape 7” were removed.</li>
+<li><strong>Renaming Columns</strong>: Columns were renamed to a specific format.</li>
+<li><strong>Data Splitting</strong>: Data was split into <code>thickness_ba</code> and <code>thickness_backing</code>.</li>
+<li><strong>Data Transformation</strong>: Both subsets were reshaped to a longer format.</li>
+<li><strong>Data Merging</strong>: Merged <code>width</code>, <code>thickness_ba</code>, and <code>thickness_backing</code> into a single dataset named <code>data</code>.</li>
+</ol>
+</section>
+<section id="stereo_phys.csv" class="level2">
+<h2 class="anchored" data-anchor-id="stereo_phys.csv">stereo_phys.csv</h2>
+<ol type="1">
+<li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>stereo</code>.</li>
+<li><strong>Column Removal</strong>: Columns <code>X.4</code> to <code>X.9</code> were removed.</li>
+<li><strong>Text Cleaning</strong>: “Tape” was removed from the <code>X</code> column and the <code>-</code> value in the <code>X.3</code> column was replaced with “no color”.</li>
+<li><strong>Renaming Columns</strong>: Columns were renamed to descriptive names.</li>
+<li><strong>Data Merging</strong>: Physical data from <code>stereo</code> was merged with the <code>data</code> dataset.</li>
+</ol>
+</section>
+<section id="plm.csv" class="level2">
+<h2 class="anchored" data-anchor-id="plm.csv">plm.csv</h2>
+<ol type="1">
+<li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>plm</code>.</li>
+<li><strong>Column Removal</strong>: Columns <code>X.7</code> to <code>X.12</code> were removed.</li>
+<li><strong>Row Removal</strong>: Rows corresponding to “tape 7” and the last two rows were removed.</li>
+<li><strong>Renaming Columns</strong>: Columns were renamed to descriptive names.</li>
+<li><strong>Text Cleaning</strong>: The <code>-</code> value in the <code>plm_color</code> column was replaced with “no color”.</li>
+<li><strong>Data Transformation</strong>: The <code>BOPP</code> column was converted to binary values.</li>
+<li><strong>Data Merging</strong>: Physical data from <code>plm</code> was merged with the <code>data</code> dataset.</li>
+</ol>
+</section>
+<section id="encoding-data" class="level2">
+<h2 class="anchored" data-anchor-id="encoding-data">Encoding Data</h2>
+<ol type="1">
+<li><strong>Encoding Categorical Variables</strong>: Several columns were encoded into numeric values.</li>
+<li><strong>Data Type Conversion</strong>: Converted several categorical columns to numeric.</li>
+</ol>
+</section>
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
