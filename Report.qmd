@@ -23,6 +23,9 @@ With $n=22$ different tapes, there are $\frac{n(n-1)}{2} = 231$ different pairs 
 
 ## Multidimensional Scaling
 
+Multidimensional scaling is a technique used to visualize the similarities or dissimilarities between tapes by plotting them on a two dimensional plot. Although the data for each tape is multivariate, multidimensional scaling preserves the distances between pairwise observations when plotting. Multidimensional scaling in R takes in a symmetric matrix of dissimilarities (in this case a 22x22 symmetric matrix of the distances between each tape) and returns a set of 22 points where the distances between each point is approximately equal to the dissimilarities between each point. These points are then plotted on a two dimensional scatter plot to visualize the "closeness" of the tapes.
+
+## K-means Clustering
 
 
 # Analysis
