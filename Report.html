@@ -86,6 +86,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="multidimensional-scaling" class="level2">
 <h2 class="anchored" data-anchor-id="multidimensional-scaling">Multidimensional Scaling</h2>
+<p>Multidimensional scaling is a technique used to visualize the similarities or dissimilarities between tapes by plotting them on a two dimensional plot. Although the data for each tape is multivariate, multidimensional scaling preserves the distances between pairwise observations when plotting. Multidimensional scaling in R takes in a symmetric matrix of dissimilarities (in this case a 22x22 symmetric matrix of the distances between each tape) and returns a set of 22 points where the distances between each point is approximately equal to the dissimilarities between each point. These points are then plotted on a two dimensional scatter plot to visualize the “closeness” of the tapes.</p>
+</section>
+<section id="k-means-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="k-means-clustering">K-means Clustering</h2>
+<p>Further visualization of differences between tapes can be conducted through K-means clustering. The set of 22 points from multidimensional scaling is passed into a function that partitions the points into <span class="math inline">\(k\)</span> clusters or groups. These groups are represented by its center, which is the mean of the points assigned to that cluster. The groups are determined to be the minimized sum of squares from the points to their assigned cluster center.</p>
+<p>There are many different methods of calculating the optimal number of clusters in K-means clustering. For this analysis, the gap statistic was used whereby the dispersion within each cluster is compared. Once the optimal value of <span class="math inline">\(k\)</span> is chosen, K-means clustering groups the tapes into k groups and we are able to overlay these groupings on the two dimensional scatter plot of the tapes to analyze their proximity.</p>
 </section>
 </section>
 <section id="analysis" class="level1">

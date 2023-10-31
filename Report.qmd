@@ -27,6 +27,10 @@ Multidimensional scaling is a technique used to visualize the similarities or di
 
 ## K-means Clustering
 
+Further visualization of differences between tapes can be conducted through K-means clustering. The set of 22 points from multidimensional scaling is passed into a function that partitions the points into $k$ clusters or groups. These groups are represented by its center, which is the mean of the points assigned to that cluster. The groups are determined to be the minimized sum of squares from the points to their assigned cluster center.
+
+There are many different methods of calculating the optimal number of clusters in K-means clustering. For this analysis, the gap statistic was used whereby the dispersion within each cluster is compared. Once the optimal value of $k$ is chosen, K-means clustering groups the tapes into k groups and we are able to overlay these groupings on the two dimensional scatter plot of the tapes to analyze their proximity. 
+
 # Analysis
 
 # Conclusion
