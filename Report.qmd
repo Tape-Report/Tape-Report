@@ -27,7 +27,6 @@ Multidimensional scaling is a technique used to visualize the similarities or di
 
 ## K-means Clustering
 
-
 # Analysis
 
 # Conclusion
