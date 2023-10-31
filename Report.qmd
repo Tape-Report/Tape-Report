@@ -11,9 +11,19 @@ editor: visual
 
 # Methods
 
-The methods used to analyze the differences between each of the 22 tapes involve calculating distances between the tapes and visualizing their distances from each other. Distances were calculated using a combination of absolute differences as well as Hamming Loss distances. Visualization of these distances were generated using the methods of Multidimensional Scaling and K-means clustering.
+The methods used to analyze the differences between each of the 22 tapes involve calculating distances between the tapes and then visualizing their distances from each other. Distances were calculated using a combination of absolute differences as well as the Hamming loss. Visualization of these distances were generated using the methods of Multidimensional Scaling and K-means clustering.
 
 ## Distances
+
+Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. To calculate the distance between two tapes, the following equation was used. $$\begin{align} D(T_i, T_j) &= \sum_{k=1}^{15} d(T_{ik}, T_{jk})\\\\ &= |T_{i1} - T_{j1}| + |T_{i2} - T_{j2}| + |T_{i3} - T_{j3}| + H(T_{i4}, T_{j4}) + \dots + H(T_{i15}, T_{j15}) \end{align}\\$$ where $H(T_{im}, T_{jm})$ is 1 if $T_{im} \neq T_{jm}$ and 0 if $T_{im} = T_{jm}$ for $m = 4, 5,..., 15$.
+
+The above distance formula for two tapes sums the difference between each of the 15 variables, comparing the average width of one tape with the average width of another tape, the surface color of one tape with the surface color of another tape, etc. For each of the three numerical variables, the difference was calculated by taking the absolute value of the difference between values. For the remaining 12 categorical variables the Hamming loss was calculated by summing the number of categorical variables where the value of the first tape is not equal to the value of the second tape. The Hamming loss added to the three numerical variable differences provides the distance between two tapes $i$ and $j$.
+
+With $n=22$ different tapes, there are $\frac{n(n-1)}{2} = 231$ different pairs of tapes and therefore, 231 different pairwise distances.
+
+## Multidimensional Scaling
+
+
 
 # Analysis
 
