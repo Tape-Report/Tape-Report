@@ -7,7 +7,9 @@ editor: visual
 
 # Project Background
 
-# Data Cleaning/Organization
+#Objectives
+
+# Exploratory Data Analysis
 
 This part provides a concise summary of the data cleaning and organization steps for the four datasets: `width.csv`, `thickness.csv`, `stereo_phys.csv`, and `plm.csv`.
 
@@ -56,19 +58,21 @@ This part provides a concise summary of the data cleaning and organization steps
 1. **Encoding Categorical Variables**: Several columns were encoded into numeric values.
 2. **Data Type Conversion**: Converted several categorical columns to numeric.
 
-# Methods
+# Models
 
 The method used to analyze the dissimilarities between each of the 22 tapes involves visualizing a heatmap with hierarchical clusterings of the tapes. These clusterings are determined by the "distances" between each tape. 
 
 ## Tape Distances
 
-Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower's distance is calculated between two tapes which accounts for the categorical variables. Before taking the Gower's distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable `Texture` has three levels: "Rough", "Smooth", "Slightly Rough". "Rough" was coded as 1, "Smooth" was coded as 2, and "Slightly Rough" was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, "Rough" now has the numerical value 0.33, "Smooth" now has the numerical value 0.67, and "Slightly Rough" now has the numerical value 1. Once all categorical variables were coded numerically, Gower's distance calculates a matrix of dissimilarities for each of the $\frac{n(n-1)}{2} = \frac{22(22-1)}{2} = 231$ pairs of tapes.
+Defining a distance between tapes provides a measure of dissimilarity between each tape. Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower's distance is calculated between two tapes which accounts for both numerical and categorical variables. Before taking the Gower's distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable `Texture` has three levels: "Rough", "Smooth", "Slightly Rough". "Rough" was coded as 1, "Smooth" was coded as 2, and "Slightly Rough" was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, "Rough" now has the numerical value 0.33, "Smooth" now has the numerical value 0.67, and "Slightly Rough" now has the numerical value 1. 
+
+Once all categorical variables were coded numerically, Gower's distance calculates a matrix of dissimilarities for each of the $\frac{n(n-1)}{2} = \frac{22(22-1)}{2} = 231$ pairs of tapes. For the three numerical variables, a range-normalized Manhattan distance is calculated: $$|\frac{T_{ik} - T_{jk}}{\text{range}_k}|$$ where $i, j = 1, 2, \dots, 22$ and $k = 1, 2, 3$. For the remaining 12 categorical variables, the distance is calculated with the following formula: $$I(T_{im} \neq T_{jm})$$ where $i, j = 1, 2, \dots, 22$ and $m = 4, 5, \dots, 15$. This indicator will equal 1 if $T_{im} \neq T_{jm}$ and 0 if $T_{im} \neq T_{jm}$. Gower's distance between two tapes is calculated by summing these variable distances and dividing by 15, the number of variables. 
 
 ## Heatmap
 
-A heatmap allows one to visually identify similarities and dissimilarities between rows, or tapes by observing the values of the columns, or variables of each tape. Cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows based on the distances calculated from the previous section.
+Once we have the pairwise distances between tapes from the data, we can use a heatmap to visually identify similarities and dissimilarities between rows, or tapes, by observing the values of the variables. Cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section.
 
-# Analysis
+# Analysis and Conclusion
 
 ```{r}
 #| echo: false
@@ -329,4 +333,3 @@ pheatmap(data[,2:16],
 
 ```
 
-# Conclusion
