@@ -281,7 +281,7 @@ ggscatter(mds, x = "Dim1", y = "Dim2",
 library(philentropy)
 row.names(data) <- c(seq(1, 6), seq(8, 23))
 library(cluster)
-gower_samples <- as.dist(as.matrix(daisy(data[,2:16], metric = "gower")))
+gower_samples <- as.dist(as.matrix(daisy(data[,2:16], metric = "gower",)))
 gower_features <- as.dist(as.matrix(daisy(t(data[,2:16]), metric = "gower")))
 
 pheatmap(data[,2:16], 
