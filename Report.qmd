@@ -70,4 +70,263 @@ A heatmap allows one to visually identify similarities and dissimilarities betwe
 
 # Analysis
 
+```{r}
+#| echo: false
+#| warning: false
+
+library(pheatmap)
+library(ggpubr)
+library(factoextra)
+library(fmsb)
+```
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+#data cleaning width
+width <- read.csv("width.csv", header = TRUE)
+#getting rid of averages and standard deviation columns
+width <- width %>% select(-c(5:6, 10:11, 15:20))
+#remove "Tape" from X column
+width$X <- str_replace(width$X, "Tape ", "")
+#make values numeric
+width <- data.frame(sapply(subset(width, select = c(1:10)), as.numeric))
+#remove row of NAs and remove tape 7 (paper tape)
+width <- width[-c(1, 8),]
+#add column names
+colnames(width) <- c("tape", rep("1", 3), rep("2", 3), rep("3", 3))
+#make tape column character
+width$tape <- as.factor(width$tape)
+#pivot longer
+width <- width %>% pivot_longer(!tape, names_to = "site", values_to = "width")
+
+
+#data cleaning thickness
+thickness <- read.csv("thickness.csv", header = TRUE)
+#getting rid of averages and standard deviation columns
+thickness <- thickness %>% select(-c(5:6, 10:11, 15:19))
+#remove "Tape" from X column
+thickness$X <- str_replace(thickness$X, "Tape ", "")
+#make values numeric
+thickness <- data.frame(sapply(subset(thickness, select = c(1:10)), as.numeric))
+#remove row of NAs 
+thickness <- thickness[-c(1),]
+#remove all tape 7 (paper tape)
+thickness <- thickness %>% filter(X != 7)
+#add column names
+colnames(thickness) <- c("tape", rep("1", 3), rep("2", 3), rep("3", 3))
+#make tape column character
+thickness$tape <- as.factor(thickness$tape)
+#thickness of backing and adhesive
+thickness_ba <- thickness[c(1:22),]
+#thickness of backing
+thickness_backing <- thickness[c(23:44),]
+#pivot longer
+thickness_ba <- thickness_ba %>% pivot_longer(!tape, names_to = "site", values_to = "thickness_backing_adhesive")
+thickness_backing<- thickness_backing %>% pivot_longer(!tape, names_to = "site", values_to = "thickness_backing")
+
+#merge
+data <- cbind(width, thickness_ba$thickness_backing_adhesive, thickness_backing$thickness_backing)
+colnames(data)[4] <- "thickness_backing_adhesive"
+colnames(data)[5] <- "thickness_backing"
+
+#get overall average width and thickness for each tape
+data <- data %>% group_by(tape) %>% 
+  summarize(avg_width = mean(width), 
+            avg_thick_back_ad = mean(thickness_backing_adhesive), 
+            avg_thick_back = mean(thickness_backing))
+
+```
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+#adding stereomicroscope physical data
+stereo <- read.csv("stereo_phys.csv")
+#remove X.4, X.9
+stereo <- stereo %>% select(-c(X.4:X.9))
+#remove "Tape" from X column
+stereo$X <- str_replace(stereo$X, "Tape ", "")
+#remove tape 7
+stereo <- stereo[-c(1,8),]
+#replace "-" with "no color"
+stereo$X.3 <- str_replace(stereo$X.3, "-", "no color")
+#new column names
+colnames(stereo) <- c("tape", "surface_color", "surface_feature", "wide_narrow", "stereo_color")
+#remove spaces in names
+stereo$surface_color <- str_replace(stereo$surface_color, "Matte ", "Matte")
+stereo$surface_color <- str_replace(stereo$surface_color, "Clear ", "Clear")
+#add this physical data to other data set
+data <- cbind(data, stereo[,2:5])
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+#adding plm physical characteristics
+plm <- read.csv("plm.csv")
+#remove X.7, X.12
+plm <- plm %>% select(-c(X.7:X.12))
+#remove tape 7
+plm <- plm[-c(1,8),]
+#new column names
+colnames(plm) <- c("tape", "texture", "bubbles", "particle", "edge_texture", "brightness", "plm_color", "BOPP", "extinction")
+#replace "-" with "no color"
+plm$plm_color <- str_replace(plm$plm_color, "-", "no color")
+#remove bottom two rows
+plm <- plm[-c(23, 24),]
+#BOPP make binary
+plm$BOPP <- ifelse(plm$BOPP == "-", 0, 1)
+#add this physical data to other data set
+data <- cbind(data, plm[,2:9])
+```
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+#coding all categorical variables
+#surface color
+data$surface_color <- ifelse(data$surface_color == "Clear", 1, data$surface_color)
+data$surface_color <- ifelse(data$surface_color == "Matte", 2, data$surface_color)
+data$surface_color <- ifelse(data$surface_color == "Slightly Matte", 3, data$surface_color)
+data$surface_color <- ifelse(data$surface_color == "Off-white Matte", 4, data$surface_color)
+
+#surface feature
+data$surface_feature <- ifelse(data$surface_feature == "Rough ", 1, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Circular bubbles", 2, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Irregular large bubble (water-like)", 3, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Slightly Rough", 4, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Large and small circular bubbles", 5, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Many grooves and bubbles ", 6, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Minimal surface features ", 7, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Many grooves ", 8, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Some small bubbles", 9, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Large bubble and Irregular bubbles", 10, data$surface_feature)
+data$surface_feature <- ifelse(data$surface_feature == "Grooves (water-like)", 11, data$surface_feature)
+
+#wide/narrow
+data$wide_narrow <- ifelse(data$wide_narrow == "Wide ", 1, 0)
+
+#stereomicroscope color
+data$stereo_color <- ifelse(data$stereo_color == "Pink ", "Pink", data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "no color", 1, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Pink/Green ", 2, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Purple/Green ", 3, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Brown ", 4, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Pink/Green/Yellow/Purple/Blue", 5, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Slightly Pink ", 6, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Pink", 7, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Blue/Pink ", 8, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Pink/Red/Orange", 9, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "Purple/Blue", 10, data$stereo_color)
+data$stereo_color <- ifelse(data$stereo_color == "High Pink ", 11, data$stereo_color)
+
+#texture
+data$texture <- ifelse(data$texture == "Rough ", 1, data$texture)
+data$texture <- ifelse(data$texture == "Smooth ", 2, data$texture)
+data$texture <- ifelse(data$texture == "Slightly Rough ", 3, data$texture)
+
+#bubbles
+data$bubbles <- ifelse(data$bubbles == "Y", 1, 0)
+
+#particle
+data$particle <- ifelse(data$particle == "Y", 1, 0)
+
+#edge texture
+data$edge_texture <- ifelse(data$edge_texture == "Smooth ", 1, 0)
+
+#brightness
+data$brightness <- ifelse(data$brightness == "Low Dark ", 1, data$brightness)
+data$brightness <- ifelse(data$brightness == "Bright ", 2, data$brightness)
+data$brightness <- ifelse(data$brightness == "Dark ", 3, data$brightness)
+data$brightness <- ifelse(data$brightness == "Low Bright ", 4, data$brightness)
+data$brightness <- ifelse(data$brightness == "High Bright ", 5, data$brightness)
+data$brightness <- ifelse(data$brightness == "Bright", 6, data$brightness)
+
+#plm color
+data$plm_color <- ifelse(data$plm_color == "no color", 1, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Green ", 2, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Slightly green ", 3, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Pink/Yellow", 4, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Pink/Yellow/Bright Blue/Turquoise", 5, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Light Green ", 6, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Yellow/Gold", 7, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Yellow/Green", 8, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Orange", 9, data$plm_color)
+data$plm_color <- ifelse(data$plm_color == "Yellow", 10, data$plm_color)
+
+#extinction
+data$extinction <- ifelse(data$extinction == "Parallel ", "Parallel", data$extinction)
+data$extinction <- ifelse(data$extinction == "Oblique ", "Oblique", data$extinction)
+data$extinction <- ifelse(data$extinction == "Symmetrical", "Symmetric ", data$extinction)
+data$extinction <- ifelse(data$extinction == "Parallel", 1, data$extinction)
+data$extinction <- ifelse(data$extinction == "Symmetric ", 2, data$extinction)
+data$extinction <- ifelse(data$extinction == "Oblique", 3, data$extinction)
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+#convert categorical to numiercal
+data$surface_color <- as.numeric(data$surface_color)
+data$surface_feature <- as.numeric(data$surface_feature)
+data$stereo_color <- as.numeric(data$stereo_color)
+data$texture <- as.numeric(data$texture)
+data$brightness <- as.numeric(data$brightness)
+data$plm_color <- as.numeric(data$plm_color)
+data$extinction <- as.numeric(data$extinction)
+
+#normalize all variables
+data$avg_width <- data$avg_width/max(data$avg_width)
+data$avg_thick_back_ad <- data$avg_thick_back_ad/max(data$avg_thick_back_ad)
+data$avg_thick_back <- data$avg_thick_back/max(data$avg_thick_back)
+data$surface_color <- data$surface_color/max(data$surface_color)
+data$surface_feature <- data$surface_feature/max(data$surface_feature)
+data$stereo_color <- data$stereo_color/max(data$stereo_color)
+data$texture <- data$texture/max(data$texture)
+data$brightness <- data$brightness/max(data$brightness)
+data$plm_color <- data$plm_color/max(data$plm_color)
+data$extinction <- data$extinction/max(data$extinction)
+```
+
+```{r, out.width="200%"}
+#| echo: false
+#| warning: false
+
+
+#pheatmap
+library(philentropy)
+row.names(data) <- c(seq(1, 6), seq(8, 23))
+library(cluster)
+gower_samples <- as.dist(as.matrix(daisy(data[,2:16], metric = "gower")))
+gower_features <- as.dist(as.matrix(daisy(t(data[,2:16]), metric = "gower")))
+
+pheatmap(data[,2:16], 
+                    display_numbers = TRUE, 
+                    clustering_distance_rows=gower_samples,
+                    clustering_distance_cols=gower_features,
+                    labels_col = c("Avg Width", "Avg Thickness Backing/Adhesive", "Avg Thickness Backing", "Surface Color", "Surface Feature", "Wide", "Stereomicroscope Color", "Texture", "Bubbles", "Particle", "Edge Texture", "Brightness", "PLM Color", "BOPP", "Angle of Extinction"),
+                    labels_row = c("3M 810 Scotch - Tape 1", "3M 600 Scotch - Tape 2", "Scotch Double-Sided - Tape 3", "Scotch Gift-Wrap - Tape 4", "Scotch Transparent - Tape 5", "Scotch Super-Hold - Tape 6", "Scotch Wall-Safe - Tape 8", "Scotch Scrapbooking - Tape 9", "Scotch Single Sided - Tape 10", "Scotch MultiTask - Tape 11", "Scotch Poster - Tape 12", "Staples Invisible - Tape 13", "Amazon Matte - Tape 14", "Amazon Invisible - Tape 15", "Amazon Transparent - Tape 16", "Pen+Gear Invisible - Tape 17", "Pen+Gear Transparent - Tape 18", "Pen+Gear Double-Sided - Tape 19", "Up & Up Transparent - Tape 20", "Up & Up Invisible - Tape 21", "Up & Up Double-Sided - Tape 22", "Up & Up Gift - Tape 23"),
+                    angle_col = 3,
+                    fontsize = 8,
+                    cellheight = 7.8,
+                    cellwidth = 19
+                    )
+
+
+
+```
+
 # Conclusion
