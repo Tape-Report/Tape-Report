@@ -284,9 +284,16 @@ library(cluster)
 gower_samples <- as.dist(as.matrix(daisy(data[,2:16], metric = "gower")))
 gower_features <- as.dist(as.matrix(daisy(t(data[,2:16]), metric = "gower")))
 
-pheatmap(data[,2:16], display_numbers = TRUE, clustering_distance_rows=gower_samples,
-clustering_distance_cols=gower_features)
-         #clustering_distance_rows = distances, clustering_method = hclust)
+pheatmap(data[,2:16], 
+                    display_numbers = TRUE, 
+                    clustering_distance_rows=gower_samples,
+                    clustering_distance_cols=gower_features,
+                    labels_col = c("Avg Width", "Avg Thickness Backing/Adhesive", "Avg Thickness Backing", "Surface Color", "Surface Feature", "Wide", "Stereomicroscope Color", "Texture", "Bubbles", "Particle", "Edge Texture", "Brightness", "PLM Color", "BOPP", "Angle of Extinction"),
+                    labels_row = c("3M 810 Scotch - Tape 1", "3M 600 Scotch - Tape 2", "Scotch Double-Sided - Tape 3", "Scotch Gift-Wrap - Tape 4", "Scotch Transparent - Tape 5", "Scotch Super-Hold - Tape 6", "Scotch Wall-Safe - Tape 8", "Scotch Scrapbooking - Tape 9", "Scotch Single Sided - Tape 10", "Scotch MultiTask - Tape 11", "Scotch Poster - Tape 12", "Staples Invisible - Tape 13", "Amazon Matte - Tape 14", "Amazon Invisible - Tape 15", "Amazon Transparent - Tape 16", "Pen+Gear Invisible - Tape 17", "Pen+Gear Transparent - Tape 18", "Pen+Gear Double-Sided - Tape 19", "Up & Up Transparent - Tape 20", "Up & Up Invisible - Tape 21", "Up & Up Double-Sided - Tape 22", "Up & Up Gift - Tape 23"),
+                    angle_col = 3,
+                    fontsize = 8,
+                    cellheight = 7.8,
+                    )
 
 
 
