@@ -222,7 +222,7 @@ pair_distance <- function(first, second){
     val <- abs(first[i] - second[i])
     sum <- val + sum
   }
-  sum <- sum + sum(first[5:15]!=second[5:15])
+  sum <- sum + sum(first[5:16]!=second[5:16])
   return(sum)
 }
 
@@ -267,12 +267,12 @@ ggscatter(mds, x = "Dim1", y = "Dim2",
           repel = TRUE)
 
 #optimal number of clusters
-# fviz_nbclust(data[2:15], kmeans, nstart = 50, method = "gap_stat", nboot = 50, k.max = 21)
+# fviz_nbclust(data[2:16], kmeans, nstart = 50, method = "gap_stat", nboot = 50, k.max = 21)
 # 
 # k <- kmeans(mds, 14, nstart =100)
 # 
 # row.names(data) <- c(seq(1, 6), seq(8, 23))
-# fviz_cluster(k, data = data[2:15])
+# fviz_cluster(k, data = data[2:16])
 
 ```
 
@@ -281,14 +281,12 @@ ggscatter(mds, x = "Dim1", y = "Dim2",
 library(philentropy)
 row.names(data) <- c(seq(1, 6), seq(8, 23))
 library(cluster)
-gower_samples <- as.dist(as.matrix(daisy(data[,2:15], metric = "gower")))
-gower_features <- as.dist(as.matrix(daisy(t(data[,2:15]), metric = "gower")))
+gower_samples <- as.dist(as.matrix(daisy(data[,2:16], metric = "gower")))
+gower_features <- as.dist(as.matrix(daisy(t(data[,2:16]), metric = "gower")))
 
-pheatmap(data[,2:15], display_numbers = TRUE,clustering_distance_rows=gower_samples,
+pheatmap(data[,2:16], display_numbers = TRUE, clustering_distance_rows=gower_samples,
 clustering_distance_cols=gower_features)
          #clustering_distance_rows = distances, clustering_method = hclust)
-
-
 
 
 

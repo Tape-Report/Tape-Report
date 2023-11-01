@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
-<p>The methods used to analyze the differences between each of the 22 tapes involve calculating distances between the tapes and then visualizing their distances from each other. Distances were calculated using a combination of absolute differences as well as the Hamming loss. Visualization of these distances were generated using the methods of Multidimensional Scaling and K-means clustering.</p>
+<p>The method used to analyze the similarities between each of the 22 tapes involve calculating distances between the tapes and then visualizing their distances from each other. Distances were calculated using a combination of absolute differences as well as the Hamming loss. Visualization of these distances were generated using the methods of Multidimensional Scaling and K-means clustering.</p>
 <section id="distances" class="level2">
 <h2 class="anchored" data-anchor-id="distances">Distances</h2>
 <p>Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. To calculate the distance between two tapes, the following equation was used. <span class="math display">\[\begin{align} D(T_i, T_j) &amp;= \sum_{k=1}^{15} d(T_{ik}, T_{jk})\\\\ &amp;= |T_{i1} - T_{j1}| + |T_{i2} - T_{j2}| + |T_{i3} - T_{j3}| + H(T_{i4}, T_{j4}) + \dots + H(T_{i15}, T_{j15}) \end{align}\\\]</span> where <span class="math inline">\(H(T_{im}, T_{jm})\)</span> is 1 if <span class="math inline">\(T_{im} \neq T_{jm}\)</span> and 0 if <span class="math inline">\(T_{im} = T_{jm}\)</span> for <span class="math inline">\(m = 4, 5,..., 15\)</span>.</p>
