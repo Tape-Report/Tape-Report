@@ -15,58 +15,58 @@ This part provides a concise summary of the data cleaning and organization steps
 
 ## width.csv
 
-1. **Data Loading**: The dataset was loaded into the variable `width`.
-2. **Column Removal**: Averages and standard deviation columns were deleted.
-3. **Text Cleaning**: "Tape" was removed from the `X` column.
-4. **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
-5. **Row Removal**: Rows containing NAs and "tape 7" were removed.
-6. **Renaming Columns**: Columns were renamed to a specific format.
-7. **Data Transformation**: The dataset was reshaped to a longer format.
+1.  **Data Loading**: The dataset was loaded into the variable `width`.
+2.  **Column Removal**: Averages and standard deviation columns were deleted.
+3.  **Text Cleaning**: "Tape" was removed from the `X` column.
+4.  **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
+5.  **Row Removal**: Rows containing NAs and "tape 7" were removed.
+6.  **Renaming Columns**: Columns were renamed to a specific format.
+7.  **Data Transformation**: The dataset was reshaped to a longer format.
 
 ## thickness.csv
 
-1. **Data Loading**: The dataset was loaded into the variable `thickness`.
-2. **Column Removal**: Averages and standard deviation columns were deleted.
-3. **Text Cleaning**: "Tape" was removed from the `X` column.
-4. **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
-5. **Row Removal**: Rows containing NAs and "tape 7" were removed.
-6. **Renaming Columns**: Columns were renamed to a specific format.
-7. **Data Splitting**: Data was split into `thickness_ba` and `thickness_backing`.
-8. **Data Transformation**: Both subsets were reshaped to a longer format.
-9. **Data Merging**: Merged `width`, `thickness_ba`, and `thickness_backing` into a single dataset named `data`.
+1.  **Data Loading**: The dataset was loaded into the variable `thickness`.
+2.  **Column Removal**: Averages and standard deviation columns were deleted.
+3.  **Text Cleaning**: "Tape" was removed from the `X` column.
+4.  **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
+5.  **Row Removal**: Rows containing NAs and "tape 7" were removed.
+6.  **Renaming Columns**: Columns were renamed to a specific format.
+7.  **Data Splitting**: Data was split into `thickness_ba` and `thickness_backing`.
+8.  **Data Transformation**: Both subsets were reshaped to a longer format.
+9.  **Data Merging**: Merged `width`, `thickness_ba`, and `thickness_backing` into a single dataset named `data`.
 
 ## stereo_phys.csv
 
-1. **Data Loading**: The dataset was loaded into the variable `stereo`.
-2. **Column Removal**: Columns `X.4` to `X.9` were removed.
-3. **Text Cleaning**: "Tape" was removed from the `X` column and the `-` value in the `X.3` column was replaced with "no color".
-4. **Renaming Columns**: Columns were renamed to descriptive names.
-5. **Data Merging**: Physical data from `stereo` was merged with the `data` dataset.
+1.  **Data Loading**: The dataset was loaded into the variable `stereo`.
+2.  **Column Removal**: Columns `X.4` to `X.9` were removed.
+3.  **Text Cleaning**: "Tape" was removed from the `X` column and the `-` value in the `X.3` column was replaced with "no color".
+4.  **Renaming Columns**: Columns were renamed to descriptive names.
+5.  **Data Merging**: Physical data from `stereo` was merged with the `data` dataset.
 
 ## plm.csv
 
-1. **Data Loading**: The dataset was loaded into the variable `plm`.
-2. **Column Removal**: Columns `X.7` to `X.12` were removed.
-3. **Row Removal**: Rows corresponding to "tape 7" and the last two rows were removed.
-4. **Renaming Columns**: Columns were renamed to descriptive names.
-5. **Text Cleaning**: The `-` value in the `plm_color` column was replaced with "no color".
-6. **Data Transformation**: The `BOPP` column was converted to binary values.
-7. **Data Merging**: Physical data from `plm` was merged with the `data` dataset.
+1.  **Data Loading**: The dataset was loaded into the variable `plm`.
+2.  **Column Removal**: Columns `X.7` to `X.12` were removed.
+3.  **Row Removal**: Rows corresponding to "tape 7" and the last two rows were removed.
+4.  **Renaming Columns**: Columns were renamed to descriptive names.
+5.  **Text Cleaning**: The `-` value in the `plm_color` column was replaced with "no color".
+6.  **Data Transformation**: The `BOPP` column was converted to binary values.
+7.  **Data Merging**: Physical data from `plm` was merged with the `data` dataset.
 
 ## Encoding Data
 
-1. **Encoding Categorical Variables**: Several columns were encoded into numeric values.
-2. **Data Type Conversion**: Converted several categorical columns to numeric.
+1.  **Encoding Categorical Variables**: Several columns were encoded into numeric values.
+2.  **Data Type Conversion**: Converted several categorical columns to numeric.
 
 # Models
 
-The method used to analyze the dissimilarities between each of the 22 tapes involves visualizing a heatmap with hierarchical clusterings of the tapes. These clusterings are determined by the "distances" between each tape. 
+The method used to analyze the dissimilarities between each of the 22 tapes involves visualizing a heatmap with hierarchical clusterings of the tapes. These clusterings are determined by the "distances" between each tape.
 
 ## Tape Distances
 
-Defining a distance between tapes provides a measure of dissimilarity between each tape. Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower's distance is calculated between two tapes which accounts for both numerical and categorical variables. Before taking the Gower's distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable `Texture` has three levels: "Rough", "Smooth", "Slightly Rough". "Rough" was coded as 1, "Smooth" was coded as 2, and "Slightly Rough" was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, "Rough" now has the numerical value 0.33, "Smooth" now has the numerical value 0.67, and "Slightly Rough" now has the numerical value 1. 
+Defining a distance between tapes provides a measure of dissimilarity between each tape. Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower's distance is calculated between two tapes which accounts for both numerical and categorical variables. Before taking the Gower's distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable `Texture` has three levels: "Rough", "Smooth", "Slightly Rough". "Rough" was coded as 1, "Smooth" was coded as 2, and "Slightly Rough" was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, "Rough" now has the numerical value 0.33, "Smooth" now has the numerical value 0.67, and "Slightly Rough" now has the numerical value 1.
 
-Once all categorical variables were coded numerically, Gower's distance calculates a matrix of dissimilarities for each of the $\frac{n(n-1)}{2} = \frac{22(22-1)}{2} = 231$ pairs of tapes. For the three numerical variables, a range-normalized Manhattan distance is calculated: $$|\frac{T_{ik} - T_{jk}}{\text{range}_k}|$$ where $i, j = 1, 2, \dots, 22$ and $k = 1, 2, 3$. For the remaining 12 categorical variables, the distance is calculated with the following formula: $$I(T_{im} \neq T_{jm})$$ where $i, j = 1, 2, \dots, 22$ and $m = 4, 5, \dots, 15$. This indicator will equal 1 if $T_{im} \neq T_{jm}$ and 0 if $T_{im} \neq T_{jm}$. Gower's distance between two tapes is calculated by summing these variable distances and dividing by 15, the number of variables. 
+Once all categorical variables were coded numerically, Gower's distance calculates a matrix of dissimilarities for each of the $\frac{n(n-1)}{2} = \frac{22(22-1)}{2} = 231$ pairs of tapes. For the three numerical variables, a range-normalized Manhattan distance is calculated: $$|\frac{T_{ik} - T_{jk}}{\text{range}_k}|$$ where $i, j = 1, 2, \dots, 22$ and $k = 1, 2, 3$. For the remaining 12 categorical variables, the distance is calculated with the following formula: $$I(T_{im} \neq T_{jm})$$ where $i, j = 1, 2, \dots, 22$ and $m = 4, 5, \dots, 15$. This indicator will equal 1 if $T_{im} \neq T_{jm}$ and 0 if $T_{im} \neq T_{jm}$. Gower's distance between two tapes is calculated by summing these variable distances and dividing by 15, the number of variables.
 
 ## Heatmap
 
@@ -167,7 +167,6 @@ stereo$surface_color <- str_replace(stereo$surface_color, "Clear ", "Clear")
 #add this physical data to other data set
 data <- cbind(data, stereo[,2:5])
 ```
-
 
 ```{r}
 #| echo: false
@@ -277,7 +276,6 @@ data$extinction <- ifelse(data$extinction == "Symmetric ", 2, data$extinction)
 data$extinction <- ifelse(data$extinction == "Oblique", 3, data$extinction)
 ```
 
-
 ```{r}
 #| echo: false
 #| warning: false
@@ -333,3 +331,4 @@ pheatmap(data[,2:16],
 
 ```
 
+???
