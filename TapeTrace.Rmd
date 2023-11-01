@@ -1,83 +1,10 @@
 ---
-title: "Differentiating Tape for Trace Evidence"
-author: "Yingmai Chen, Maysen Pagan, Chang Shi, Yan Wang"
-format: html
-editor: visual
+title: "allData"
+author: "Maysen Pagan"
+date: "2023-10-10"
+output: pdf_document
 ---
-
-# Project Background
-
-#Objectives
-
-# Exploratory Data Analysis
-
-This part provides a concise summary of the data cleaning and organization steps for the four datasets: `width.csv`, `thickness.csv`, `stereo_phys.csv`, and `plm.csv`.
-
-## width.csv
-
-1. **Data Loading**: The dataset was loaded into the variable `width`.
-2. **Column Removal**: Averages and standard deviation columns were deleted.
-3. **Text Cleaning**: "Tape" was removed from the `X` column.
-4. **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
-5. **Row Removal**: Rows containing NAs and "tape 7" were removed.
-6. **Renaming Columns**: Columns were renamed to a specific format.
-7. **Data Transformation**: The dataset was reshaped to a longer format.
-
-## thickness.csv
-
-1. **Data Loading**: The dataset was loaded into the variable `thickness`.
-2. **Column Removal**: Averages and standard deviation columns were deleted.
-3. **Text Cleaning**: "Tape" was removed from the `X` column.
-4. **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
-5. **Row Removal**: Rows containing NAs and "tape 7" were removed.
-6. **Renaming Columns**: Columns were renamed to a specific format.
-7. **Data Splitting**: Data was split into `thickness_ba` and `thickness_backing`.
-8. **Data Transformation**: Both subsets were reshaped to a longer format.
-9. **Data Merging**: Merged `width`, `thickness_ba`, and `thickness_backing` into a single dataset named `data`.
-
-## stereo_phys.csv
-
-1. **Data Loading**: The dataset was loaded into the variable `stereo`.
-2. **Column Removal**: Columns `X.4` to `X.9` were removed.
-3. **Text Cleaning**: "Tape" was removed from the `X` column and the `-` value in the `X.3` column was replaced with "no color".
-4. **Renaming Columns**: Columns were renamed to descriptive names.
-5. **Data Merging**: Physical data from `stereo` was merged with the `data` dataset.
-
-## plm.csv
-
-1. **Data Loading**: The dataset was loaded into the variable `plm`.
-2. **Column Removal**: Columns `X.7` to `X.12` were removed.
-3. **Row Removal**: Rows corresponding to "tape 7" and the last two rows were removed.
-4. **Renaming Columns**: Columns were renamed to descriptive names.
-5. **Text Cleaning**: The `-` value in the `plm_color` column was replaced with "no color".
-6. **Data Transformation**: The `BOPP` column was converted to binary values.
-7. **Data Merging**: Physical data from `plm` was merged with the `data` dataset.
-
-## Encoding Data
-
-1. **Encoding Categorical Variables**: Several columns were encoded into numeric values.
-2. **Data Type Conversion**: Converted several categorical columns to numeric.
-
-# Models
-
-The method used to analyze the dissimilarities between each of the 22 tapes involves visualizing a heatmap with hierarchical clusterings of the tapes. These clusterings are determined by the "distances" between each tape. 
-
-## Tape Distances
-
-Defining a distance between tapes provides a measure of dissimilarity between each tape. Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower's distance is calculated between two tapes which accounts for both numerical and categorical variables. Before taking the Gower's distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable `Texture` has three levels: "Rough", "Smooth", "Slightly Rough". "Rough" was coded as 1, "Smooth" was coded as 2, and "Slightly Rough" was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, "Rough" now has the numerical value 0.33, "Smooth" now has the numerical value 0.67, and "Slightly Rough" now has the numerical value 1. 
-
-Once all categorical variables were coded numerically, Gower's distance calculates a matrix of dissimilarities for each of the $\frac{n(n-1)}{2} = \frac{22(22-1)}{2} = 231$ pairs of tapes. For the three numerical variables, a range-normalized Manhattan distance is calculated: $$|\frac{T_{ik} - T_{jk}}{\text{range}_k}|$$ where $i, j = 1, 2, \dots, 22$ and $k = 1, 2, 3$. For the remaining 12 categorical variables, the distance is calculated with the following formula: $$I(T_{im} \neq T_{jm})$$ where $i, j = 1, 2, \dots, 22$ and $m = 4, 5, \dots, 15$. This indicator will equal 1 if $T_{im} \neq T_{jm}$ and 0 if $T_{im} \neq T_{jm}$. Gower's distance between two tapes is calculated by summing these variable distances and dividing by 15, the number of variables. 
-
-## Heatmap
-
-Once we have the pairwise distances between tapes from the data, we can use a heatmap to visually identify similarities and dissimilarities between rows, or tapes, by observing the values of the variables. Cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section.
-
-# Analysis and Conclusion
-
 ```{r}
-#| echo: false
-#| warning: false
-
 library(pheatmap)
 library(ggpubr)
 library(factoextra)
@@ -85,9 +12,6 @@ library(fmsb)
 ```
 
 ```{r}
-#| echo: false
-#| warning: false
-
 library(tidyverse)
 #data cleaning width
 width <- read.csv("width.csv", header = TRUE)
@@ -145,10 +69,6 @@ data <- data %>% group_by(tape) %>%
 ```
 
 ```{r}
-#| echo: false
-#| warning: false
-
-
 #adding stereomicroscope physical data
 stereo <- read.csv("stereo_phys.csv")
 #remove X.4, X.9
@@ -170,10 +90,6 @@ data <- cbind(data, stereo[,2:5])
 
 
 ```{r}
-#| echo: false
-#| warning: false
-
-
 #adding plm physical characteristics
 plm <- read.csv("plm.csv")
 #remove X.7, X.12
@@ -193,10 +109,6 @@ data <- cbind(data, plm[,2:9])
 ```
 
 ```{r}
-#| echo: false
-#| warning: false
-
-
 #coding all categorical variables
 #surface color
 data$surface_color <- ifelse(data$surface_color == "Clear", 1, data$surface_color)
@@ -279,10 +191,6 @@ data$extinction <- ifelse(data$extinction == "Oblique", 3, data$extinction)
 
 
 ```{r}
-#| echo: false
-#| warning: false
-
-
 #convert categorical to numiercal
 data$surface_color <- as.numeric(data$surface_color)
 data$surface_feature <- as.numeric(data$surface_feature)
@@ -305,16 +213,75 @@ data$plm_color <- data$plm_color/max(data$plm_color)
 data$extinction <- data$extinction/max(data$extinction)
 ```
 
-```{r, out.width="200%"}
-#| echo: false
-#| warning: false
+```{r}
+#function that calculates the distance between two tapes
+
+pair_distance <- function(first, second){
+  sum <- 0
+  for (i in 2:4){
+    val <- abs(first[i] - second[i])
+    sum <- val + sum
+  }
+  sum <- sum + sum(first[5:16]!=second[5:16])
+  return(sum)
+}
+
+```
+
+```{r}
+#unique combos of rows
+combos <- combn(seq(1:22), 2)
+#empty list for distances of all possible combos of tapes
+distances <- c()
+#calculates the distance between all possible combos of tapes
+for (i in 1:dim(combos)[2]){
+  first <- data[combos[,i][1],]
+  second <- data[combos[,i][2],]
+  distances <- c(distances, pair_distance(first, second))
+}
+
+combo_distances <- cbind(t(combos), matrix(distances))
+```
+
+```{r}
+#multidimensional scaling
+
+#symmetric matrix of our calculated distances
+
+mat <- matrix(0, nrow = 22, ncol = 22)
+mat[lower.tri(mat, diag = FALSE)] <- unlist(combo_distances[,3])
+mat[upper.tri(mat)] = t(mat)[upper.tri(mat)]
 
 
+mds <- mat %>% 
+  cmdscale() %>%
+  as_tibble()
+
+mds <- as.data.frame(mds)
+row.names(mds) <- c(seq(1, 6), seq(8, 23))
+
+colnames(mds) <- c("Dim1", "Dim2")
+ggscatter(mds, x = "Dim1", y = "Dim2", 
+          label = rownames(mds),
+          size = 1,
+          repel = TRUE)
+
+#optimal number of clusters
+# fviz_nbclust(data[2:16], kmeans, nstart = 50, method = "gap_stat", nboot = 50, k.max = 21)
+# 
+# k <- kmeans(mds, 14, nstart =100)
+# 
+# row.names(data) <- c(seq(1, 6), seq(8, 23))
+# fviz_cluster(k, data = data[2:16])
+
+```
+
+```{r}
 #pheatmap
 library(philentropy)
 row.names(data) <- c(seq(1, 6), seq(8, 23))
 library(cluster)
-gower_samples <- as.dist(as.matrix(daisy(data[,2:16], metric = "gower")))
+gower_samples <- as.dist(as.matrix(daisy(data[,2:16], metric = "gower",)))
 gower_features <- as.dist(as.matrix(daisy(t(data[,2:16]), metric = "gower")))
 
 pheatmap(data[,2:16], 
@@ -326,10 +293,8 @@ pheatmap(data[,2:16],
                     angle_col = 3,
                     fontsize = 8,
                     cellheight = 7.8,
-                    cellwidth = 19
                     )
 
 
 
 ```
-
