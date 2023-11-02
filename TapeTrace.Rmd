@@ -191,7 +191,7 @@ data$extinction <- ifelse(data$extinction == "Oblique", 3, data$extinction)
 
 
 ```{r}
-#convert categorical to numiercal
+#convert categorical to numercal
 data$surface_color <- as.numeric(data$surface_color)
 data$surface_feature <- as.numeric(data$surface_feature)
 data$stereo_color <- as.numeric(data$stereo_color)
@@ -219,7 +219,7 @@ data$extinction <- data$extinction/max(data$extinction)
 pair_distance <- function(first, second){
   sum <- 0
   for (i in 2:4){
-    val <- abs(first[i] - second[i])
+    val <- (first[i] - second[i])^2
     sum <- val + sum
   }
   sum <- sum + sum(first[5:16]!=second[5:16])
@@ -250,7 +250,7 @@ combo_distances <- cbind(t(combos), matrix(distances))
 
 mat <- matrix(0, nrow = 22, ncol = 22)
 mat[lower.tri(mat, diag = FALSE)] <- unlist(combo_distances[,3])
-mat[upper.tri(mat)] = t(mat)[upper.tri(mat)]
+mat <- as.dist(mat)
 
 
 mds <- mat %>% 
@@ -259,12 +259,15 @@ mds <- mat %>%
 
 mds <- as.data.frame(mds)
 row.names(mds) <- c(seq(1, 6), seq(8, 23))
+mds$clust <- c()
 
-colnames(mds) <- c("Dim1", "Dim2")
-ggscatter(mds, x = "Dim1", y = "Dim2", 
+colnames(mds) <- c("Dimension 1", "Dimension 2")
+ggscatter(mds, x = "Dimension 1", y = "Dimension 2", 
           label = rownames(mds),
           size = 1,
-          repel = TRUE)
+          repel = TRUE, 
+          title = "Multidimensional Scaling Plot") +
+  theme_bw()
 
 #optimal number of clusters
 # fviz_nbclust(data[2:16], kmeans, nstart = 50, method = "gap_stat", nboot = 50, k.max = 21)

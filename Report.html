@@ -69,14 +69,17 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="project-background" class="level1">
-<h1>Project Background</h1>
+<section id="project-background" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Project Background</h1>
 </section>
-<section id="data-cleaningorganization" class="level1">
-<h1>Data Cleaning/Organization</h1>
+<section id="objectives" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Objectives</h1>
+</section>
+<section id="exploratory-data-analysis" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Exploratory Data Analysis</h1>
 <p>This part provides a concise summary of the data cleaning and organization steps for the four datasets: <code>width.csv</code>, <code>thickness.csv</code>, <code>stereo_phys.csv</code>, and <code>plm.csv</code>.</p>
-<section id="width.csv" class="level2">
-<h2 class="anchored" data-anchor-id="width.csv">width.csv</h2>
+<section id="width.csv" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="width.csv"><span class="header-section-number">3.1</span> width.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>width</code>.</li>
 <li><strong>Column Removal</strong>: Averages and standard deviation columns were deleted.</li>
@@ -87,8 +90,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Transformation</strong>: The dataset was reshaped to a longer format.</li>
 </ol>
 </section>
-<section id="thickness.csv" class="level2">
-<h2 class="anchored" data-anchor-id="thickness.csv">thickness.csv</h2>
+<section id="thickness.csv" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="thickness.csv"><span class="header-section-number">3.2</span> thickness.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>thickness</code>.</li>
 <li><strong>Column Removal</strong>: Averages and standard deviation columns were deleted.</li>
@@ -101,8 +104,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Merging</strong>: Merged <code>width</code>, <code>thickness_ba</code>, and <code>thickness_backing</code> into a single dataset named <code>data</code>.</li>
 </ol>
 </section>
-<section id="stereo_phys.csv" class="level2">
-<h2 class="anchored" data-anchor-id="stereo_phys.csv">stereo_phys.csv</h2>
+<section id="stereo_phys.csv" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="stereo_phys.csv"><span class="header-section-number">3.3</span> stereo_phys.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>stereo</code>.</li>
 <li><strong>Column Removal</strong>: Columns <code>X.4</code> to <code>X.9</code> were removed.</li>
@@ -111,8 +114,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Merging</strong>: Physical data from <code>stereo</code> was merged with the <code>data</code> dataset.</li>
 </ol>
 </section>
-<section id="plm.csv" class="level2">
-<h2 class="anchored" data-anchor-id="plm.csv">plm.csv</h2>
+<section id="plm.csv" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="plm.csv"><span class="header-section-number">3.4</span> plm.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>plm</code>.</li>
 <li><strong>Column Removal</strong>: Columns <code>X.7</code> to <code>X.12</code> were removed.</li>
@@ -123,37 +126,53 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Merging</strong>: Physical data from <code>plm</code> was merged with the <code>data</code> dataset.</li>
 </ol>
 </section>
-<section id="encoding-data" class="level2">
-<h2 class="anchored" data-anchor-id="encoding-data">Encoding Data</h2>
+<section id="encoding-data" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="encoding-data"><span class="header-section-number">3.5</span> Encoding Data</h2>
 <ol type="1">
 <li><strong>Encoding Categorical Variables</strong>: Several columns were encoded into numeric values.</li>
 <li><strong>Data Type Conversion</strong>: Converted several categorical columns to numeric.</li>
 </ol>
 </section>
 </section>
-<section id="methods" class="level1">
-<h1>Methods</h1>
+<section id="models" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Models</h1>
 <p>The method used to analyze the dissimilarities between each of the 22 tapes involves visualizing a heatmap with hierarchical clusterings of the tapes. These clusterings are determined by the “distances” between each tape.</p>
-<section id="tape-distances" class="level2">
-<h2 class="anchored" data-anchor-id="tape-distances">Tape Distances</h2>
+<section id="sec-distances" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-distances"><span class="header-section-number">4.1</span> Tape Distances</h2>
 <p>Defining a distance between tapes provides a measure of dissimilarity between each tape. Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower’s distance is calculated between two tapes which accounts for both numerical and categorical variables. Before taking the Gower’s distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable <code>Texture</code> has three levels: “Rough”, “Smooth”, “Slightly Rough”. “Rough” was coded as 1, “Smooth” was coded as 2, and “Slightly Rough” was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, “Rough” now has the numerical value 0.33, “Smooth” now has the numerical value 0.67, and “Slightly Rough” now has the numerical value 1.</p>
 <p>Once all categorical variables were coded numerically, Gower’s distance calculates a matrix of dissimilarities for each of the <span class="math inline">\(\frac{n(n-1)}{2} = \frac{22(22-1)}{2} = 231\)</span> pairs of tapes. For the three numerical variables, a range-normalized Manhattan distance is calculated: <span class="math display">\[|\frac{T_{ik} - T_{jk}}{\text{range}_k}|\]</span> where <span class="math inline">\(i, j = 1, 2, \dots, 22\)</span> and <span class="math inline">\(k = 1, 2, 3\)</span>. For the remaining 12 categorical variables, the distance is calculated with the following formula: <span class="math display">\[I(T_{im} \neq T_{jm})\]</span> where <span class="math inline">\(i, j = 1, 2, \dots, 22\)</span> and <span class="math inline">\(m = 4, 5, \dots, 15\)</span>. This indicator will equal 1 if <span class="math inline">\(T_{im} \neq T_{jm}\)</span> and 0 if <span class="math inline">\(T_{im} \neq T_{jm}\)</span>. Gower’s distance between two tapes is calculated by summing these variable distances and dividing by 15, the number of variables.</p>
 </section>
-<section id="heatmap" class="level2">
-<h2 class="anchored" data-anchor-id="heatmap">Heatmap</h2>
-<p>Once we have the pairwise distances between tapes from the data, we can use a heatmap to visually identify similarities and dissimilarities between rows, or tapes, by observing the values of the variables. Cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section.</p>
-</section>
-</section>
-<section id="analysis" class="level1">
-<h1>Analysis</h1>
+<section id="heatmap" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="heatmap"><span class="header-section-number">4.2</span> Heatmap</h2>
+<p>Once we have the pairwise distances between tapes from the data, we can use a heatmap and multidimensional scaling to visually identify similarities and dissimilarities between tapes. In a heatmap cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section. The following figure is the heatmap generated for the 22 tapes using Gower’s distance.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Report_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" style="width:200.0%"></p>
+<div id="fig-heatmap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Report_files/figure-html/fig-heatmap-1.png" class="img-fluid figure-img" style="width:200.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Clustered Heatmap of 22 Different Tapes. Tape 7 is omitted</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<section id="multidimensional-scaling" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="multidimensional-scaling"><span class="header-section-number">4.3</span> Multidimensional Scaling</h2>
+<p>Multidimensional scaling provides another method of visualizing these clusters and their distances from each other on a two dimensional plot. Although the data for each tape is multivariate, multidimensional scaling preserves the distances between pairwise observations when plotting. Multidimensional scaling also takes in the distances calculated from <a href="#sec-distances">Section&nbsp;4.1</a> and returns a set of 22 points where the distances between each point is approximately equal to the dissimilarities between each point. These points are then plotted on a two dimensional scatter plot to visualize the “closeness” of the tapes and can be viewed below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-mds" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Report_files/figure-html/fig-mds-1.png" class="img-fluid figure-img" style="width:200.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Multidimensional Scaling Plot of 22 Different Tapes. Tape 7 is omitted.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analysis-and-conclusion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Analysis and Conclusion</h1>
 </section>
 
 </main>
