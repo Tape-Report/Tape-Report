@@ -252,7 +252,7 @@ data$brightness <- ifelse(data$brightness == "Bright ", 2, data$brightness)
 data$brightness <- ifelse(data$brightness == "Dark ", 3, data$brightness)
 data$brightness <- ifelse(data$brightness == "Low Bright ", 4, data$brightness)
 data$brightness <- ifelse(data$brightness == "High Bright ", 5, data$brightness)
-data$brightness <- ifelse(data$brightness == "Bright", 6, data$brightness)
+data$brightness <- ifelse(data$brightness == "Bright", 2, data$brightness)
 
 #plm color
 data$plm_color <- ifelse(data$plm_color == "no color", 1, data$plm_color)
