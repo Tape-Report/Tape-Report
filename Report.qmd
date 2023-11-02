@@ -12,52 +12,15 @@ number-sections: true
 
 # Exploratory Data Analysis
 
-This part provides a concise summary of the data cleaning and organization steps for the four datasets: `width.csv`, `thickness.csv`, `stereo_phys.csv`, and `plm.csv`.
+In the data preparation process for four distinct datasets—width.csv, thickness.csv, stereo_phys.csv, and plm.csv—a meticulous approach was employed to ensure cleanliness and organization. The width.csv dataset was loaded and immediately cleaned by removing average and standard deviation columns, excising the term "tape" from the X column, converting the first ten columns to numeric values, and discarding any rows filled with NAs or labeled "tape 7". After renaming the columns to conform to a specific format, the data was reshaped into a longer format for easier manipulation.
 
-## width.csv
+Similarly, the thickness.csv dataset underwent an equivalent process of loading, pruning, cleansing, and transforming, with the addition of splitting the data into thickness_ba and thickness_backing subsets. These subsets were then individually reshaped and eventually merged with the width dataset to create a single, more comprehensive dataset named data.
 
-1.  **Data Loading**: The dataset was loaded into the variable `width`.
-2.  **Column Removal**: Averages and standard deviation columns were deleted.
-3.  **Text Cleaning**: "Tape" was removed from the `X` column.
-4.  **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
-5.  **Row Removal**: Rows containing NAs and "tape 7" were removed.
-6.  **Renaming Columns**: Columns were renamed to a specific format.
-7.  **Data Transformation**: The dataset was reshaped to a longer format.
+For the stereo_phys.csv file, after the initial steps of loading and cleaning were replicated, the columns were renamed to more descriptive terms, and the physical data it contained was incorporated into the data dataset to further enhance its depth.
 
-## thickness.csv
+The plm.csv file was also subjected to a similar sequence of actions. Notably, the BOPP column was transformed into binary values to better reflect the nature of its data, and like the others, its refined output was merged into the data dataset.
 
-1.  **Data Loading**: The dataset was loaded into the variable `thickness`.
-2.  **Column Removal**: Averages and standard deviation columns were deleted.
-3.  **Text Cleaning**: "Tape" was removed from the `X` column.
-4.  **Data Type Conversion**: Values in columns 1-10 were converted to numeric.
-5.  **Row Removal**: Rows containing NAs and "tape 7" were removed.
-6.  **Renaming Columns**: Columns were renamed to a specific format.
-7.  **Data Splitting**: Data was split into `thickness_ba` and `thickness_backing`.
-8.  **Data Transformation**: Both subsets were reshaped to a longer format.
-9.  **Data Merging**: Merged `width`, `thickness_ba`, and `thickness_backing` into a single dataset named `data`.
-
-## stereo_phys.csv
-
-1.  **Data Loading**: The dataset was loaded into the variable `stereo`.
-2.  **Column Removal**: Columns `X.4` to `X.9` were removed.
-3.  **Text Cleaning**: "Tape" was removed from the `X` column and the `-` value in the `X.3` column was replaced with "no color".
-4.  **Renaming Columns**: Columns were renamed to descriptive names.
-5.  **Data Merging**: Physical data from `stereo` was merged with the `data` dataset.
-
-## plm.csv
-
-1.  **Data Loading**: The dataset was loaded into the variable `plm`.
-2.  **Column Removal**: Columns `X.7` to `X.12` were removed.
-3.  **Row Removal**: Rows corresponding to "tape 7" and the last two rows were removed.
-4.  **Renaming Columns**: Columns were renamed to descriptive names.
-5.  **Text Cleaning**: The `-` value in the `plm_color` column was replaced with "no color".
-6.  **Data Transformation**: The `BOPP` column was converted to binary values.
-7.  **Data Merging**: Physical data from `plm` was merged with the `data` dataset.
-
-## Encoding Data
-
-1.  **Encoding Categorical Variables**: Several columns were encoded into numeric values.
-2.  **Data Type Conversion**: Converted several categorical columns to numeric.
+The final step in the data preparation phase was the encoding of categorical variables across several columns into numeric form, a crucial step for subsequent analytical tasks that require numerical input. This thorough conversion from categorical to numeric across the datasets standardizes the data, preparing it for more complex analysis or machine learning applications.
 
 # Models
 
