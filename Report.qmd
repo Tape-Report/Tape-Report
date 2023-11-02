@@ -3,11 +3,12 @@ title: "Differentiating Tape for Trace Evidence"
 author: "Yingmai Chen, Maysen Pagan, Chang Shi, Yan Wang"
 format: html
 editor: visual
+number-sections: true
 ---
 
 # Project Background
 
-#Objectives
+# Objectives
 
 # Exploratory Data Analysis
 
@@ -62,7 +63,7 @@ This part provides a concise summary of the data cleaning and organization steps
 
 The method used to analyze the dissimilarities between each of the 22 tapes involves visualizing a heatmap with hierarchical clusterings of the tapes. These clusterings are determined by the "distances" between each tape.
 
-## Tape Distances
+## Tape Distances {#sec-distances}
 
 Defining a distance between tapes provides a measure of dissimilarity between each tape. Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower's distance is calculated between two tapes which accounts for both numerical and categorical variables. Before taking the Gower's distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable `Texture` has three levels: "Rough", "Smooth", "Slightly Rough". "Rough" was coded as 1, "Smooth" was coded as 2, and "Slightly Rough" was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, "Rough" now has the numerical value 0.33, "Smooth" now has the numerical value 0.67, and "Slightly Rough" now has the numerical value 1.
 
@@ -70,9 +71,7 @@ Once all categorical variables were coded numerically, Gower's distance calculat
 
 ## Heatmap
 
-Once we have the pairwise distances between tapes from the data, we can use a heatmap to visually identify similarities and dissimilarities between rows, or tapes, by observing the values of the variables. Cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section.
-
-# Analysis and Conclusion
+Once we have the pairwise distances between tapes from the data, we can use a heatmap and multidimensional scaling to visually identify similarities and dissimilarities between tapes. In a heatmap cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section. The following figure is the heatmap generated for the 22 tapes using Gower's distance. 
 
 ```{r}
 #| echo: false
@@ -304,6 +303,8 @@ data$extinction <- data$extinction/max(data$extinction)
 ```
 
 ```{r, out.width="200%"}
+#| label: fig-heatmap
+#| fig-cap: "Clustered Heatmap of 22 Different Tapes. Tape 7 is omitted"
 #| echo: false
 #| warning: false
 
@@ -327,9 +328,87 @@ pheatmap(data[,2:16],
                     cellwidth = 19
                     )
 
+```
+## Multidimensional Scaling
 
+Multidimensional scaling provides another method of visualizing these clusters and their distances from each other on a two dimensional plot. Although the data for each tape is multivariate, multidimensional scaling preserves the distances between pairwise observations when plotting. Multidimensional scaling also takes in the distances calculated from @sec-distances and returns a set of 22 points where the distances between each point is approximately equal to the dissimilarities between each point. These points are then plotted on a two dimensional scatter plot to visualize the "closeness" of the tapes and can be viewed below. 
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+#function that calculates the distance between two tapes
+
+pair_distance <- function(first, second){
+  sum <- 0
+  for (i in 2:4){
+    val <- (first[i] - second[i])^2
+    sum <- val + sum
+  }
+  sum <- sum + sum(first[5:16]!=second[5:16])
+  return(sum)
+}
 
 ```
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+#unique combos of rows
+combos <- combn(seq(1:22), 2)
+#empty list for distances of all possible combos of tapes
+distances <- c()
+#calculates the distance between all possible combos of tapes
+for (i in 1:dim(combos)[2]){
+  first <- data[combos[,i][1],]
+  second <- data[combos[,i][2],]
+  distances <- c(distances, pair_distance(first, second))
+}
+
+combo_distances <- cbind(t(combos), matrix(distances))
+```
+
+
+```{r, out.width = "200%"}
+#| label: fig-mds
+#| fig-cap: "Multidimensional Scaling Plot of 22 Different Tapes. Tape 7 is omitted."
+#| echo: false
+#| warning: false
+
+
+#multidimensional scaling
+
+#symmetric matrix of our calculated distances
+
+mat <- matrix(0, nrow = 22, ncol = 22)
+mat[lower.tri(mat, diag = FALSE)] <- unlist(combo_distances[,3])
+mat <- as.dist(mat)
+
+
+mds <- mat %>% 
+  cmdscale() %>%
+  as_tibble()
+
+mds <- as.data.frame(mds)
+row.names(mds) <- c(seq(1, 6), seq(8, 23))
+mds$clust <- c()
+
+colnames(mds) <- c("Dimension 1", "Dimension 2")
+ggscatter(mds, x = "Dimension 1", y = "Dimension 2", 
+          label = rownames(mds),
+          size = 1,
+          repel = TRUE, 
+          title = "Multidimensional Scaling Plot") +
+  theme_bw() +
+  theme(axis.title = element_text(size = 14),
+        plot.title = element_text(size = 16))
+```
+
+
+# Analysis and Conclusion
 
 pheatmap analysis: According to pheatmap pictures, 22 tapes were divided into 5 clusters. Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double-Sided), Tape 2(3M 600 Scotch), Tape 3(Scotch Double-Sided), Tape 9(Scotch Scarpbooking) and Tape22(Up & Up Double-Sided). Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up & Up Transparent). Cluster 3 is made Up of Tape 23(Up & Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible). Cluster 4 is made up of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask). Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up & Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).
 
@@ -342,4 +421,6 @@ Cluster 3 feature: All the tape of this cluster is wide.
 Cluster 4 feature: All tapes of this cluster is smooth. All the tape is wide.
 
 Cluster 5 feature: All tapes of this cluster is smooth. All the tape is wide.
+
+
 
