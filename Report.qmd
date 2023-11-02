@@ -371,6 +371,7 @@ for (i in 1:dim(combos)[2]){
 combo_distances <- cbind(t(combos), matrix(distances))
 ```
 
+
 ```{r, out.width = "200%"}
 #| label: fig-mds
 #| fig-cap: "Multidimensional Scaling Plot of 22 Different Tapes. Tape 7 is omitted."
@@ -408,6 +409,18 @@ ggscatter(mds, x = "Dimension 1", y = "Dimension 2",
 
 
 # Analysis and Conclusion
+
+pheatmap analysis: According to pheatmap pictures, 22 tapes were divided into 5 clusters. Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double-Sided), Tape 2(3M 600 Scotch), Tape 3(Scotch Double-Sided), Tape 9(Scotch Scarpbooking) and Tape22(Up & Up Double-Sided). Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up & Up Transparent). Cluster 3 is made Up of Tape 23(Up & Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible). Cluster 4 is made up of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask). Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up & Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).
+
+Cluster 1 feature: All tapes of this cluster is smooth. Most of the tape is narrow.
+
+Cluster 2 feature: All tapes of this cluster is not smooth. All the tape is wide.
+
+Cluster 3 feature: All the tape of this cluster is wide.
+
+Cluster 4 feature: All tapes of this cluster is smooth. All the tape is wide.
+
+Cluster 5 feature: All tapes of this cluster is smooth. All the tape is wide.
 
 
 
