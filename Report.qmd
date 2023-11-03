@@ -7,7 +7,20 @@ editor: visual
 
 # Project Background
 
-#Objectives
+Project Background
+
+Each roll of tape was divided into 3 sections based on each roll's length and each roll of tape was divided into 3 sections based on each roll's length. Site 1 refers to the beginning section of each roll, site 2 refers to the middle section of each roll and site 3 refers to the last/end section of each roll. Meanwhile, the width and thickness were measured using a caliber tool.
+
+The experiment descriptions and procedures involves multiple points. The width measurements of the tapes were meticulously conducted on a singular day, with three measurements taken at each designated site, resulting in a total of nine measurements per roll. In contrast, the thickness measurements spanned multiple days, with a key emphasis on blind measurements, ensuring the accuracy and integrity of the data. Similar to the width measurements, the thickness measurements also consisted of three measurements at each site, yielding a total of nine measurements per roll.
+
+To assess the significance of the findings, the client utilized a two-factor ANOVA with replicated analysis, both for the widths and the thicknesses of the tapes. This robust statistical approach was employed to determine whether there existed any noteworthy differences among the various tape samples. Additionally, the client employed a power of discrimination formula, as referenced in pertinent research literature, to discern if significant variations were present among groups of tapes with distinct physical attributes. Furthermore, this formula was adeptly utilized to ascertain the presence of significant disparities among the tape groups with differing physical characteristics and angle of extinctions, contributing to the comprehensive evaluation of the experimental data.
+
+The raw data provided by the client https://docs.google.com/spreadsheets/d/1ZPM0a1mVVcM8CcvVHBy32hc5yPdICWp9mimaw94MDS0/edit#gid=111836551
+
+Project Objective
+
+As we grasp the ultimate goals and objectives of this project, the client seeks to determine whether various types of tape can be reliably distinguished from one another. The primary aim is to investigate the potential use of tape as trace evidence in forensic science. Key aspects related to the tapes include, firstly, their frequent presence on victims or their use by suspects in the creation of improvised explosive devices. Secondly, the question arises of whether tape can be considered as questioned evidence, subject to comparison with known samples to establish links between individuals and specific cases.
+
 
 # Exploratory Data Analysis
 
@@ -331,15 +344,28 @@ pheatmap(data[,2:16],
 
 ```
 
-pheatmap analysis: According to pheatmap pictures, 22 tapes were divided into 5 clusters. Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double-Sided), Tape 2(3M 600 Scotch), Tape 3(Scotch Double-Sided), Tape 9(Scotch Scarpbooking) and Tape22(Up & Up Double-Sided). Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up & Up Transparent). Cluster 3 is made Up of Tape 23(Up & Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible). Cluster 4 is made up of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask). Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up & Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).
+pheatmap analysis: According to pheatmap pictures, 22 tapes were divided into 5 clusters. 
+Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double-Sided), Tape 2(3M 600 Scotch), Tape 3(Scotch Double-Sided), Tape 9(Scotch Scarpbooking) and Tape22(Up & Up Double-Sided).
 
-Cluster 1 feature: All tapes of this cluster is smooth. Most of the tape is narrow.
+Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up & Up Transparent). 
 
-Cluster 2 feature: All tapes of this cluster is not smooth. All the tape is wide.
+Cluster 3 is made Up of Tape 23(Up & Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible). 
 
-Cluster 3 feature: All the tape of this cluster is wide.
+Cluster 4 is made up of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask). 
 
-Cluster 4 feature: All tapes of this cluster is smooth. All the tape is wide.
+Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up & Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).
 
-Cluster 5 feature: All tapes of this cluster is smooth. All the tape is wide.
+Cluster 1 feature: All tapes in this cluster have a smooth edge texture, are narrow in width, exhibit a clear surface color, possess a smooth texture, contain bubbles, and have no particles. In Surface Feature, each tape is different. For example, tapes has Minimal Surface Features, Large bubble and Irregular, Circular bubbles, Irregular large bubble(water-like), Many Grooves and bubbles, and Grooves(water-like). 
 
+Cluster 2 feature: All tapes of this cluster are rough, are wide in width, exhibit High Bright in brightness, have a smooth texture, a clear surface color, don't have bubbles, and are categorized as MOPP. In Stereomicroscope Color, each tape is different. For example, tapes has Pink/Green/Yellow/Purple/Blue, Blue/Pink, Pink/Red/Orange, and Purple/Blue.
+
+Cluster 3 feature: All tapes of this cluster are wide in width, exhibit Bright in brightness, have a rough surface feature and texture, have no particles, don't have bubbles, and are categorized as MOPP.
+In PLM Color, tape is different. For example, tapes has Yellow, Light Green, and Yellow/Gold.
+
+Cluster 4 feature: All tapes of this cluster have a smooth edge texture, are wide in width, have particles, don't have bubbles, and are categorized as MOPP. In Brightness, tape is different. For example, tapes has Bright and Low Bright. 
+
+Cluster 5 feature: All tapes of this cluster have a smooth edge texture, are wide in width, mostly exhibit a rough surface feature, have a rough texture, display a Pink color under the stereomicroscope, have a Matte surface color, contain particles, and are categorized as MOPP. In Brightness, tape is different. For example,tapes has Low Dark, Low Bright and Dark.
+
+Conclusion
+
+Therefore, according to the analysis of pheatmap, we can know that pheatmap can effectively distinguish different tapes and find out their similar rules. Each cluster has many of the same variables in its tape. At the same time, each cluster also has a different place, which can distinguish all tapes, it is easy to find the tape number and brand.
