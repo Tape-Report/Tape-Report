@@ -69,14 +69,20 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="project-background" class="level1">
-<h1>Project Background</h1>
+<section id="project-background" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Project Background</h1>
+<p>Each roll of tape was divided into 3 sections based on each roll’s length and each roll of tape was divided into 3 sections based on each roll’s length. Site 1 refers to the beginning section of each roll, site 2 refers to the middle section of each roll and site 3 refers to the last/end section of each roll. Meanwhile, the width and thickness were measured using a caliber tool.</p>
+<p>The experiment descriptions and procedures involves multiple points. The width measurements of the tapes were meticulously conducted on a singular day, with three measurements taken at each designated site, resulting in a total of nine measurements per roll. In contrast, the thickness measurements spanned multiple days, with a key emphasis on blind measurements, ensuring the accuracy and integrity of the data. Similar to the width measurements, the thickness measurements also consisted of three measurements at each site, yielding a total of nine measurements per roll.</p>
+<p>To assess the significance of the findings, the client utilized a two-factor ANOVA with replicated analysis, both for the widths and the thicknesses of the tapes. This robust statistical approach was employed to determine whether there existed any noteworthy differences among the various tape samples. Additionally, the client employed a power of discrimination formula, as referenced in pertinent research literature, to discern if significant variations were present among groups of tapes with distinct physical attributes. Furthermore, this formula was adeptly utilized to ascertain the presence of significant disparities among the tape groups with differing physical characteristics and angle of extinctions, contributing to the comprehensive evaluation of the experimental data.</p>
+<p>The raw data provided by the client https://docs.google.com/spreadsheets/d/1ZPM0a1mVVcM8CcvVHBy32hc5yPdICWp9mimaw94MDS0/edit#gid=111836551</p>
+<p>======= # Objectives</p>
+<p>As we grasp the ultimate goals and objectives of this project, the client seeks to determine whether various types of tape can be reliably distinguished from one another. The primary aim is to investigate the potential use of tape as trace evidence in forensic science. Key aspects related to the tapes include, firstly, their frequent presence on victims or their use by suspects in the creation of improvised explosive devices. Secondly, the question arises of whether tape can be considered as questioned evidence, subject to comparison with known samples to establish links between individuals and specific cases.</p>
 </section>
-<section id="data-cleaningorganization" class="level1">
-<h1>Data Cleaning/Organization</h1>
+<section id="exploratory-data-analysis" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Exploratory Data Analysis</h1>
 <p>This part provides a concise summary of the data cleaning and organization steps for the four datasets: <code>width.csv</code>, <code>thickness.csv</code>, <code>stereo_phys.csv</code>, and <code>plm.csv</code>.</p>
-<section id="width.csv" class="level2">
-<h2 class="anchored" data-anchor-id="width.csv">width.csv</h2>
+<section id="width.csv" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="width.csv"><span class="header-section-number">2.1</span> width.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>width</code>.</li>
 <li><strong>Column Removal</strong>: Averages and standard deviation columns were deleted.</li>
@@ -87,8 +93,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Transformation</strong>: The dataset was reshaped to a longer format.</li>
 </ol>
 </section>
-<section id="thickness.csv" class="level2">
-<h2 class="anchored" data-anchor-id="thickness.csv">thickness.csv</h2>
+<section id="thickness.csv" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="thickness.csv"><span class="header-section-number">2.2</span> thickness.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>thickness</code>.</li>
 <li><strong>Column Removal</strong>: Averages and standard deviation columns were deleted.</li>
@@ -101,8 +107,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Merging</strong>: Merged <code>width</code>, <code>thickness_ba</code>, and <code>thickness_backing</code> into a single dataset named <code>data</code>.</li>
 </ol>
 </section>
-<section id="stereo_phys.csv" class="level2">
-<h2 class="anchored" data-anchor-id="stereo_phys.csv">stereo_phys.csv</h2>
+<section id="stereo_phys.csv" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="stereo_phys.csv"><span class="header-section-number">2.3</span> stereo_phys.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>stereo</code>.</li>
 <li><strong>Column Removal</strong>: Columns <code>X.4</code> to <code>X.9</code> were removed.</li>
@@ -111,8 +117,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Merging</strong>: Physical data from <code>stereo</code> was merged with the <code>data</code> dataset.</li>
 </ol>
 </section>
-<section id="plm.csv" class="level2">
-<h2 class="anchored" data-anchor-id="plm.csv">plm.csv</h2>
+<section id="plm.csv" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="plm.csv"><span class="header-section-number">2.4</span> plm.csv</h2>
 <ol type="1">
 <li><strong>Data Loading</strong>: The dataset was loaded into the variable <code>plm</code>.</li>
 <li><strong>Column Removal</strong>: Columns <code>X.7</code> to <code>X.12</code> were removed.</li>
@@ -123,37 +129,72 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Data Merging</strong>: Physical data from <code>plm</code> was merged with the <code>data</code> dataset.</li>
 </ol>
 </section>
-<section id="encoding-data" class="level2">
-<h2 class="anchored" data-anchor-id="encoding-data">Encoding Data</h2>
+<section id="encoding-data" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="encoding-data"><span class="header-section-number">2.5</span> Encoding Data</h2>
 <ol type="1">
 <li><strong>Encoding Categorical Variables</strong>: Several columns were encoded into numeric values.</li>
 <li><strong>Data Type Conversion</strong>: Converted several categorical columns to numeric.</li>
 </ol>
 </section>
 </section>
-<section id="methods" class="level1">
-<h1>Methods</h1>
+<section id="models" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Models</h1>
 <p>The method used to analyze the dissimilarities between each of the 22 tapes involves visualizing a heatmap with hierarchical clusterings of the tapes. These clusterings are determined by the “distances” between each tape.</p>
-<section id="tape-distances" class="level2">
-<h2 class="anchored" data-anchor-id="tape-distances">Tape Distances</h2>
+<section id="sec-distances" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-distances"><span class="header-section-number">3.1</span> Tape Distances</h2>
 <p>Defining a distance between tapes provides a measure of dissimilarity between each tape. Variables for each of the tapes included three numerical variables (width, thickness of backing, and thickness of backing and adhesive) as well as 12 categorical variables. Not all of the variables are numeric and as a result, the Gower’s distance is calculated between two tapes which accounts for both numerical and categorical variables. Before taking the Gower’s distance between each tape, the categorical variables were first converted to numeric values by encoding each level of the variable 1 to the total number of levels of that variable. For example, the categorical variable <code>Texture</code> has three levels: “Rough”, “Smooth”, “Slightly Rough”. “Rough” was coded as 1, “Smooth” was coded as 2, and “Slightly Rough” was coded as 3. Each number was then divided by the total number of levels to obtain normalized variables from 0 to 1. In the example, “Rough” now has the numerical value 0.33, “Smooth” now has the numerical value 0.67, and “Slightly Rough” now has the numerical value 1.</p>
 <p>Once all categorical variables were coded numerically, Gower’s distance calculates a matrix of dissimilarities for each of the <span class="math inline">\(\frac{n(n-1)}{2} = \frac{22(22-1)}{2} = 231\)</span> pairs of tapes. For the three numerical variables, a range-normalized Manhattan distance is calculated: <span class="math display">\[|\frac{T_{ik} - T_{jk}}{\text{range}_k}|\]</span> where <span class="math inline">\(i, j = 1, 2, \dots, 22\)</span> and <span class="math inline">\(k = 1, 2, 3\)</span>. For the remaining 12 categorical variables, the distance is calculated with the following formula: <span class="math display">\[I(T_{im} \neq T_{jm})\]</span> where <span class="math inline">\(i, j = 1, 2, \dots, 22\)</span> and <span class="math inline">\(m = 4, 5, \dots, 15\)</span>. This indicator will equal 1 if <span class="math inline">\(T_{im} \neq T_{jm}\)</span> and 0 if <span class="math inline">\(T_{im} \neq T_{jm}\)</span>. Gower’s distance between two tapes is calculated by summing these variable distances and dividing by 15, the number of variables.</p>
 </section>
-<section id="heatmap" class="level2">
-<h2 class="anchored" data-anchor-id="heatmap">Heatmap</h2>
-<p>Once we have the pairwise distances between tapes from the data, we can use a heatmap to visually identify similarities and dissimilarities between rows, or tapes, by observing the values of the variables. Cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section.</p>
-</section>
-</section>
-<section id="analysis" class="level1">
-<h1>Analysis</h1>
+<section id="heatmap" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="heatmap"><span class="header-section-number">3.2</span> Heatmap</h2>
+<p>Once we have the pairwise distances between tapes from the data, we can use a heatmap and multidimensional scaling to visually identify similarities and dissimilarities between tapes. In a heatmap cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from the previous section. The following figure is the heatmap generated for the 22 tapes using Gower’s distance.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Report_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" style="width:200.0%"></p>
+<div id="fig-heatmap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Report_files/figure-html/fig-heatmap-1.png" class="img-fluid figure-img" style="width:200.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Clustered Heatmap of 22 Different Tapes. Tape 7 is omitted</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<section id="multidimensional-scaling" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="multidimensional-scaling"><span class="header-section-number">3.3</span> Multidimensional Scaling</h2>
+<p>Multidimensional scaling provides another method of visualizing these clusters and their distances from each other on a two dimensional plot. Although the data for each tape is multivariate, multidimensional scaling preserves the distances between pairwise observations when plotting. Multidimensional scaling also takes in the distances calculated from <a href="#sec-distances">Section&nbsp;3.1</a> and returns a set of 22 points where the distances between each point is approximately equal to the dissimilarities between each point. These points are then plotted on a two dimensional scatter plot to visualize the “closeness” of the tapes and can be viewed below.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD pheatmap analysis: According to pheatmap pictures, 22 tapes were divided into 5 clusters. Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double-Sided), Tape 2(3M 600 Scotch), Tape 3(Scotch Double-Sided), Tape 9(Scotch Scarpbooking) and Tape22(Up &amp; Up Double-Sided).</p>
+<p>Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up &amp; Up Transparent).</p>
+<p>Cluster 3 is made Up of Tape 23(Up &amp; Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible).</p>
+<p>Cluster 4 is made up of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask).</p>
+<p>Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up &amp; Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).</p>
+</section>
+</section>
+<section id="cluster-1-feature-all-tapes-in-this-cluster-have-a-smooth-edge-texture-are-narrow-in-width-exhibit-a-clear-surface-color-possess-a-smooth-texture-contain-bubbles-and-have-no-particles.-in-surface-feature-each-tape-is-different.-for-example-tapes-has-minimal-surface-features-large-bubble-and-irregular-circular-bubbles-irregular-large-bubblewater-like-many-grooves-and-bubbles-and-grooveswater-like." class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Cluster 1 feature: All tapes in this cluster have a smooth edge texture, are narrow in width, exhibit a clear surface color, possess a smooth texture, contain bubbles, and have no particles. In Surface Feature, each tape is different. For example, tapes has Minimal Surface Features, Large bubble and Irregular, Circular bubbles, Irregular large bubble(water-like), Many Grooves and bubbles, and Grooves(water-like).</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-mds" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Report_files/figure-html/fig-mds-1.png" class="img-fluid figure-img" style="width:200.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Multidimensional Scaling Plot of 22 Different Tapes. Tape 7 is omitted.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-and-conclusion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Analysis and Conclusion</h1>
+<p>pheatmap analysis: According to pheatmap pictures, 22 tapes were divided into 5 clusters. Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double-Sided), Tape 2(3M 600 Scotch), Tape 3(Scotch Double-Sided), Tape 9(Scotch Scarpbooking) and Tape22(Up &amp; Up Double-Sided).</p>
+<p>Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up &amp; Up Transparent).</p>
+<p>Cluster 3 is made Up of Tape 23(Up &amp; Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible).</p>
+<p>Cluster 4 is made up of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask).</p>
+<p>Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up &amp; Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).</p>
+<p>Cluster 2 feature: All tapes of this cluster are rough, are wide in width, exhibit High Bright in brightness, have a smooth texture, a clear surface color, don’t have bubbles, and are categorized as MOPP. In Stereomicroscope Color, each tape is different. For example, tapes has Pink/Green/Yellow/Purple/Blue, Blue/Pink, Pink/Red/Orange, and Purple/Blue.</p>
+<p>Cluster 3 feature: All tapes of this cluster are wide in width, exhibit Bright in brightness, have a rough surface feature and texture, have no particles, don’t have bubbles, and are categorized as MOPP. In PLM Color, tape is different. For example, tapes has Yellow, Light Green, and Yellow/Gold.</p>
+<p>Cluster 4 feature: All tapes of this cluster have a smooth edge texture, are wide in width, have particles, don’t have bubbles, and are categorized as MOPP. In Brightness, tape is different. For example, tapes has Bright and Low Bright.</p>
+<p>Cluster 5 feature: All tapes of this cluster have a smooth edge texture, are wide in width, mostly exhibit a rough surface feature, have a rough texture, display a Pink color under the stereomicroscope, have a Matte surface color, contain particles, and are categorized as MOPP. In Brightness, tape is different. For example,tapes has Low Dark, Low Bright and Dark.</p>
+<p>Conclusion</p>
+<p>Therefore, according to the analysis of pheatmap, we can know that pheatmap can effectively distinguish different tapes and find out their similar rules. Each cluster has many of the same variables in its tape. At the same time, each cluster also has a different place, which can distinguish all tapes, it is easy to find the tape number and brand.</p>
 </section>
 
 </main>
