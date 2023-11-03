@@ -1,6 +1,9 @@
 ---
-title: "Differentiating Tape for Trace Evidence"
-author: "Yingmai Chen, Maysen Pagan, Chang Shi, Yan Wang"
+title: "Differentiating Cellulose Tape for Trace Evidence"
+author:
+  - Teaching Fellow - Minh Thu Bui
+  - Supervisor - Professor Masanao Yashima
+  - Yingmai Chen, Maysen Pagan, Chang Shi, Yan Wang
 format: pdf
 editor: visual
 number-sections: true
@@ -8,20 +11,19 @@ number-sections: true
 
 # Project Background
 
-Each roll of tape was divided into 3 sections based on each roll's length and each roll of tape was divided into 3 sections based on each roll's length. Site 1 refers to the beginning section of each roll, site 2 refers to the middle section of each roll and site 3 refers to the last/end section of each roll. Meanwhile, the width and thickness were measured using a caliber tool.
+Annamae Joyce is a Graduate student in the Chobanian and Avedisian School of Medicine at Boston University. Annamae is an intern at the Boston Police Department crime lab and is interested in differentiating cellulose tape, or scotch tape, to determine if it can be used as trace evidence.  
 
-The experiment descriptions and procedures involves multiple points. The width measurements of the tapes were meticulously conducted on a singular day, with three measurements taken at each designated site, resulting in a total of nine measurements per roll. In contrast, the thickness measurements spanned multiple days, with a key emphasis on blind measurements, ensuring the accuracy and integrity of the data. Similar to the width measurements, the thickness measurements also consisted of three measurements at each site, yielding a total of nine measurements per roll.
+The sample size of this experiment is 22 tapes. Each roll of tape was divided into 3 sections based on each roll's length. Site 1 refers to the beginning section of each roll, site 2 refers to the middle section, and site 3 refers to the last or end section.
 
-To assess the significance of the findings, the client utilized a two-factor ANOVA with replicated analysis, both for the widths and the thicknesses of the tapes. This robust statistical approach was employed to determine whether there existed any noteworthy differences among the various tape samples. Additionally, the client employed a power of discrimination formula, as referenced in pertinent research literature, to discern if significant variations were present among groups of tapes with distinct physical attributes. Furthermore, this formula was adeptly utilized to ascertain the presence of significant disparities among the tape groups with differing physical characteristics and angle of extinctions, contributing to the comprehensive evaluation of the experimental data.
-
+The width and thickness of each tape were measured using a caliber tool. The width measurements of the tapes were measured on one day, with three measurements taken at each site, resulting in a total of nine measurements per roll. The thickness was measured over multiple days, with an emphasis on blind measurements, ensuring the accuracy and integrity of the data. Similar to the width measurements, the thickness measurements also consisted of three measurements at each site, yielding a total of nine measurements per roll.
 
 # Objectives
 
-As we grasp the ultimate goals and objectives of this project, the client seeks to determine whether various types of tape can be reliably distinguished from one another. The primary aim is to investigate the potential use of tape as trace evidence in forensic science. Key aspects related to the tapes include, firstly, their frequent presence on victims or their use by suspects in the creation of improvised explosive devices. Secondly, the question arises of whether tape can be considered as questioned evidence, subject to comparison with known samples to establish links between individuals and specific cases.
+The client seeks to determine whether various types of tape can be reliably distinguished from one another based on certain measured features. The primary aim is to investigate the potential use of tape as trace evidence in forensic science. Cellulose tape is fequently found on victims or used by suspects in the creation of explosive devices. The question arises of whether tape can be considered as trace evidence to possibly link individuals to cases. 
 
-# Exploratory Data Analysis
+# Data Cleaning and Organization
 
-In the data preparation process for four distinct datasets—width.csv, thickness.csv, stereo_phys.csv, and plm.csv—a meticulous approach was employed to ensure cleanliness and organization. The width.csv dataset was loaded and immediately cleaned by removing average and standard deviation columns, excising the term "tape" from the X column, converting the first ten columns to numeric values, and discarding any rows filled with NAs or labeled "tape 7". After renaming the columns to conform to a specific format, the data was reshaped into a longer format for easier manipulation.
+In the data preparation process for four distinct datasets---width.csv, thickness.csv, stereo_phys.csv, and plm.csv---a meticulous approach was employed to ensure cleanliness and organization. The width.csv dataset was loaded and immediately cleaned by removing average and standard deviation columns, excising the term "tape" from the X column, converting the first ten columns to numeric values, and discarding any rows filled with NAs or labeled "tape 7". After renaming the columns to conform to a specific format, the data was reshaped into a longer format for easier manipulation.
 
 Similarly, the thickness.csv dataset underwent an equivalent process of loading, pruning, cleansing, and transforming, with the addition of splitting the data into thickness_ba and thickness_backing subsets. These subsets were then individually reshaped and eventually merged with the width dataset to create a single, more comprehensive dataset named data.
 
@@ -44,6 +46,7 @@ Once all categorical variables were coded numerically, Gower's distance calculat
 ## Multidimensional Scaling
 
 Once we have the pairwise distances between tapes from the data, multidimensional scaling provides one method of visualizing these clusters and their distances from each other on a two dimensional plot. Although the data for each tape is multivariate, multidimensional scaling preserves the distances between pairwise observations when plotting. Multidimensional scaling takes in the calculated distances and returns a set of 22 points where the distances between each point is approximately equal to the dissimilarities between each point. These points are then plotted on a two dimensional scatter plot to visualize the "closeness" of the tapes and can be viewed below.
+
 ```{r}
 #| echo: false
 #| warning: false
@@ -310,7 +313,7 @@ for (i in 1:dim(combos)[2]){
 
 combo_distances <- cbind(t(combos), matrix(distances))
 ```
-
+\newpage
 ```{r}
 #| label: fig-mds
 #| fig-cap: "Multidimensional Scaling Plot of 22 Different Tapes. Tape 7 is omitted."
@@ -346,45 +349,14 @@ ggscatter(mds, x = "Dimension 1", y = "Dimension 2",
         plot.title = element_text(size = 16))
 ```
 
+\newpage
 
 ## Heatmap
 
-We can also use a heatmap to visually identify similarities and dissimilarities between tapes. In a heatmap cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from @sec-distances. @fig-heatmap in @sec-appendix is the heatmap generated for the 22 tapes using Gower's distance.
+We can also use a heatmap to visually identify similarities and dissimilarities between tapes. In a heatmap cells are color-coded to quickly compare one row or tape to another. The heatmap also allows one to aggregate the rows in clusters based on the distances calculated from @sec-distances. @fig-heatmap below is the heatmap generated for the 22 tapes using Gower's distance. \
+\
 
-
-# Analysis and Conclusion
-
-From @fig-mds, we can begin to visualize some of the groups of tapes. In the top left corner, tapes 2, 3, 9, 10, and 22 are clustered together. Tapes 18 and 20 almost share the exact same point with 12 and 16 directly below them suggesting another cluster of four tapes. Tapes 11 and 6 float in the middle of the plot and may share similarities with tape 10 on the left or tape 4 on the right. The tapes in the top right corner could be divided into two clusters possibly with 14 and 12 in one, and the other tapes in another. From this multidimensional scaling plot, we can view the rudimentary groupings of tapes in about 5 clusters.
-
-Heatmap analysis: According to pheatmap pictures, 22 tapes were divided into 5 clusters.
-Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double-Sided), Tape 2(3M 600 Scotch), Tape 3(Scotch Double-Sided), Tape 9(Scotch Scarpbooking) and Tape22(Up & Up Double-Sided). 
-
-Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up & Up Transparent). 
-
-Cluster 3 is composed of Tape 23(Up & Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible). 
-
-Cluster 4 is composed of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask). 
-
-Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up & Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).
-
-Cluster 1 feature: All tapes in this cluster have a smooth edge texture, are narrow in width, exhibit a clear surface color, possess a smooth texture, contain bubbles, and have no particles. In Surface Feature, each tape is different. For example, tapes has Minimal Surface Features, Large bubble and Irregular, Circular bubbles, Irregular large bubble(water-like), Many Grooves and bubbles, and Grooves(water-like). 
-
-Cluster 2 feature: All tapes of this cluster are rough, are wide in width, exhibit High Bright in brightness, have a smooth texture, a clear surface color, don't have bubbles, and are categorized as MOPP. In Stereomicroscope Color, each tape is different. For example, tapes has Pink/Green/Yellow/Purple/Blue, Blue/Pink, Pink/Red/Orange, and Purple/Blue.
-
-Cluster 3 feature: All tapes of this cluster are wide in width, exhibit Bright in brightness, have a rough surface feature and texture, have no particles, don't have bubbles, and are categorized as MOPP.In PLM Color, tape is different. For example, tapes has Yellow, Light Green, and Yellow/Gold.
-
-Cluster 4 feature: All tapes of this cluster have a smooth edge texture, are wide in width, have particles, don't have bubbles, and are categorized as MOPP. In Brightness, tape is different. For example, tapes has Bright and Low Bright. 
-
-Cluster 5 feature: All tapes of this cluster have a smooth edge texture, are wide in width, mostly exhibit a rough surface feature, have a rough texture, display a Pink color under the stereomicroscope, have a Matte surface color, contain particles, and are categorized as MOPP. In Brightness, tape is different. For example,tapes has Low Dark, Low Bright and Dark.
-
-Therefore, according to the analysis of pheatmap, we can know that pheatmap can effectively distinguish different tapes and find out their similar rules. Each cluster has many of the same variables in its tape. At the same time, each cluster also has a different place, which can distinguish all tapes, it is easy to find the tape number and brand.
-
-\newpage
-
-# Appendix {#sec-appendix}
-
-
-```{r, out.width = "110%"}
+```{r, out.width = "100%"}
 #| label: fig-heatmap
 #| fig-cap: "Clustered Heatmap of 22 Different Tapes. Tape 7 is omitted"
 #| echo: false
@@ -406,13 +378,37 @@ pheatmap(data[,2:16],
                     labels_row = c("3M 810 Scotch - Tape 1", "3M 600 Scotch - Tape 2", "Scotch Double-Sided - Tape 3", "Scotch Gift-Wrap - Tape 4", "Scotch Transparent - Tape 5", "Scotch Super-Hold - Tape 6", "Scotch Wall-Safe - Tape 8", "Scotch Scrapbooking - Tape 9", "Scotch Single Sided - Tape 10", "Scotch MultiTask - Tape 11", "Scotch Poster - Tape 12", "Staples Invisible - Tape 13", "Amazon Matte - Tape 14", "Amazon Invisible - Tape 15", "Amazon Transparent - Tape 16", "Pen+Gear Invisible - Tape 17", "Pen+Gear Transparent - Tape 18", "Pen+Gear Double-Sided - Tape 19", "Up & Up Transparent - Tape 20", "Up & Up Invisible - Tape 21", "Up & Up Double-Sided - Tape 22", "Up & Up Gift - Tape 23"),
                     angle_col = 3,
                     fontsize = 6,
-                    cellheight = 5.7,
-                    cellwidth = 13.6
+                    cellheight = 5.6,
+                    cellwidth = 13.5
                     )
 
 ```
 
 \newpage
+
+# Analysis and Conclusion
+
+From @fig-mds, we can begin to visualize some of the groups of tapes. In the top left corner, tapes 2, 3, 9, 10, and 22 are clustered together. Tapes 18 and 20 almost share the exact same point with 12 and 16 directly below them suggesting another cluster of four tapes. Tapes 11 and 6 float in the middle of the plot and may share similarities with tape 10 on the left or tape 4 on the right. The tapes in the top right corner could be divided into two clusters possibly with 14 and 12 in one, and the other tapes in another. From this multidimensional scaling plot, we can view the rudimentary groupings of tapes in about 5 clusters.
+
+According to @fig-heatmap, 22 tapes were divided into 5 clusters. Cluster 1 is composed of tapes 10, 19, 2, 3, 9, and 22. Cluster 2 is composed of tapes 12, 16, 18, and 20. Cluster 3 contains tapes 23, 14, 15, and 17.
+Cluster 4 contains tapes 4, 6, and 11. Lastly, cluster 5 is composed of tapes 8, 5, 21, 1, and 13.
+
+Cluster 1 features: All tapes in this cluster have a smooth edge texture, are narrow in width, exhibit a clear surface color, possess a smooth texture, contain bubbles, and have no particles. In Surface Feature, each tape is different. For example, tapes has Minimal Surface Features, Large bubble and Irregular, Circular bubbles, Irregular large bubble(water-like), Many Grooves and bubbles, and Grooves(water-like).
+
+Cluster 2 features: All tapes of this cluster are rough, are wide in width, exhibit High Bright in brightness, have a smooth texture, a clear surface color, don't have bubbles, and are categorized as MOPP. In Stereomicroscope Color, each tape is different. For example, tapes has Pink/Green/Yellow/Purple/Blue, Blue/Pink, Pink/Red/Orange, and Purple/Blue.
+
+Cluster 3 features: All tapes of this cluster are wide in width, exhibit Bright in brightness, have a rough surface feature and texture, have no particles, don't have bubbles, and are categorized as MOPP.In PLM Color, tape is different. For example, tapes has Yellow, Light Green, and Yellow/Gold.
+
+Cluster 4 features: All tapes of this cluster have a smooth edge texture, are wide in width, have particles, don't have bubbles, and are categorized as MOPP. In Brightness, tape is different. For example, tapes has Bright and Low Bright.
+
+Cluster 5 features: All tapes of this cluster have a smooth edge texture, are wide in width, mostly exhibit a rough surface feature, have a rough texture, display a Pink color under the stereomicroscope, have a Matte surface color, contain particles, and are categorized as MOPP. In Brightness, tape is different. For example,tapes has Low Dark, Low Bright and Dark.
+
+Therefore, according to the analysis of pheatmap, we can know that pheatmap can effectively distinguish different tapes and find out their similar rules. Each cluster has many of the same variables in its tape. At the same time, each cluster also has a different place, which can distinguish all tapes, it is easy to find the tape number and brand.
+
+\newpage
+
+# Appendix {#sec-appendix}
+
 
 ```{r}
 #| echo: false
@@ -420,7 +416,6 @@ pheatmap(data[,2:16],
 library(tidyverse)
 library(cluster)
 ```
-
 
 ```{r}
 #| echo: false
