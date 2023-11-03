@@ -10,53 +10,43 @@ output:
 
 
 
+
+
+
+
+
 ```{r}
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(readr)
+library(tidyverse)
 library(cluster)
-library(factoextra)
 ```
 
 
 
 ```{r}
-data <- read_csv("init_data.csv")
-head(data)
-```
+data <- read.csv("init_data.csv")
 
-```{r}
-data_encoded <- data %>% mutate_all(as.factor) %>% model.matrix(~. - 1, .) %>% as.data.frame()
-head(data_encoded)
-```
+# Drop the first column (Unnamed: 0) as it appears to be an identifier
+data <- data[,-1]
 
-```{r}
-set.seed(42) # To make the results reproducible
-fviz_nbclust(data_encoded, kmeans, method = "wss")
+# Convert categorical variables to one-hot encoded format
+data_encoded <- as.data.frame(model.matrix(~.-1, data))
 
 ```
 
 ```{r}
-set.seed(42) # To make the results reproducible
-kmeans_result <- kmeans(data_encoded, centers = 5)
-data$Cluster <- kmeans_result$cluster
-table(data$Cluster)
+# Determine the optimal number of clusters using the elbow method
+inertias <- c()
+cluster_range <- 1:14  # Checking for up to 14 clusters
 
-```
+for (k in cluster_range) {
+  set.seed(42)  # Setting seed for reproducibility
+  kmeans_result <- kmeans(data_encoded, centers=k, nstart=25)
+  inertias <- c(inertias, kmeans_result$tot.withinss)
+}
 
-```{r}
-library(GGally)
-data_with_clusters <- data %>% select(-c('...1')) %>% mutate(Cluster = as.factor(Cluster))
-g <- ggpairs(data_with_clusters, columns = 1:(ncol(data_with_clusters)-1), mapping = aes(color = Cluster))
-print(g)
-
-```
-
-```{r}
-plot(cars)
-```
-
-```{r}
-plot(cars)
+# Plotting the elbow curve
+plot(cluster_range, inertias, type="l", col="blue", xlab="Number of Clusters", ylab="Inertia",
+     main="Elbow Method for Optimal Number of Clusters", ylim=c(min(inertias), max(inertias)))
+points(cluster_range, inertias, pch=19, col="red")
+grid(col="black")
 ```
