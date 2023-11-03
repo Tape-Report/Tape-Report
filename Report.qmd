@@ -429,17 +429,17 @@ Cluster 1 is composed of Tape 10(Scotch Single Sided), Tape 19(Pen + Gear Double
 
 Cluster 2 is composed of Tape 12(Scotch Poster), Tape 16(Amazon Transparent), Tape 18(Pen+Gear Transparent) and Tape20(Up & Up Transparent). 
 
-Cluster 3 is made Up of Tape 23(Up & Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible). 
+Cluster 3 is composed of Tape 23(Up & Up Gift),Tape 14(Amazon Matte), Tape 15(Amazon Matte) and Tape17(Pen+Gear Invisible). 
 
-Cluster 4 is made up of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask). 
+Cluster 4 is composed of Tape 4(Scotch Gift-Wrap), Tape 6(Scotch Super-Hold) and Tape11(Scotch MultiTask). 
 
 Cluster 5 is composed of Tape 8(Scotch Wall-Safe), Tape 5(Scotch Transparent), Tape 21(Up & Up Invisible), Tape1 (3M 810 Scotch) and Tape13(Staples Invisible).
 
+Cluster 1 feature: All tapes in this cluster have a smooth edge texture, are narrow in width, exhibit a clear surface color, possess a smooth texture, contain bubbles, and have no particles. In Surface Feature, each tape is different. For example, tapes has Minimal Surface Features, Large bubble and Irregular, Circular bubbles, Irregular large bubble(water-like), Many Grooves and bubbles, and Grooves(water-like). 
 
 Cluster 2 feature: All tapes of this cluster are rough, are wide in width, exhibit High Bright in brightness, have a smooth texture, a clear surface color, don't have bubbles, and are categorized as MOPP. In Stereomicroscope Color, each tape is different. For example, tapes has Pink/Green/Yellow/Purple/Blue, Blue/Pink, Pink/Red/Orange, and Purple/Blue.
 
-Cluster 3 feature: All tapes of this cluster are wide in width, exhibit Bright in brightness, have a rough surface feature and texture, have no particles, don't have bubbles, and are categorized as MOPP.
-In PLM Color, tape is different. For example, tapes has Yellow, Light Green, and Yellow/Gold.
+Cluster 3 feature: All tapes of this cluster are wide in width, exhibit Bright in brightness, have a rough surface feature and texture, have no particles, don't have bubbles, and are categorized as MOPP.In PLM Color, tape is different. For example, tapes has Yellow, Light Green, and Yellow/Gold.
 
 Cluster 4 feature: All tapes of this cluster have a smooth edge texture, are wide in width, have particles, don't have bubbles, and are categorized as MOPP. In Brightness, tape is different. For example, tapes has Bright and Low Bright. 
 
