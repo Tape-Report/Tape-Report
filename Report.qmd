@@ -2,7 +2,7 @@
 title: "Differentiating Cellulose Tape for Trace Evidence"
 author:
   - Teaching Fellow - Minh Thu Bui
-  - Supervisor - Professor Masanao Yashima
+  - Supervisor - Professor Masanao Yajima
   - Yingmai Chen, Maysen Pagan, Chang Shi, Yan Wang
 format: pdf
 editor: visual
