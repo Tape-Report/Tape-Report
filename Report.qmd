@@ -31,7 +31,7 @@ For the stereo_phys.csv file, after the initial steps of loading and cleaning we
 
 The plm.csv file was also subjected to a similar sequence of actions. Notably, the BOPP column was transformed into binary values to better reflect the nature of its data, and like the others, its refined output was merged into the data dataset.
 
-The final step in the data preparation phase was the encoding of categorical variables across several columns into numeric form, a crucial step for subsequent analytical tasks that require numerical input. This thorough conversion from categorical to numeric across the datasets standardizes the data, preparing it for more complex analysis or machine learning applications.
+The final step in the data preparation phase was the encoding of categorical variables across several columns into numeric form, a crucial step for subsequent analytic tasks that require numerical input. This thorough conversion from categorical to numeric across the datasets standardizes the data, preparing it for analysis.
 
 # Models
 
