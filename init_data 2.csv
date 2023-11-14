@@ -1,0 +1,23 @@
+﻿,SURFACE COLOR ,SURFACE Feature(s),WIDTH ,COLOR ,smooth/rough ,bubbles (Y/N),Particle (Y/N),Irregular or smooth edge,Bright or darker,coloring ,MOPP/BOPP,Angle of Extinction
+Tape 1,Matte ,Rough ,Wide ,-,Rough ,N,N,Smooth ,Low Dark ,Green ,-,Parallel
+Tape 2,Clear ,Circular bubbles,Narrow,-,Smooth ,Y,N,Smooth ,Bright ,Green ,-,Symmetric 
+Tape 3,Clear ,Irregular large bubble (water-like),Narrow,-,Smooth ,Y,N,Smooth ,Dark ,-,-,Symmetric 
+Tape 4,Slightly Matte,Slightly Rough,Wide ,-,Slightly Rough ,N,Y,Smooth ,Low Bright ,Slightly green ,-,Symmetric 
+Tape 5,Matte,Rough ,Wide ,-,Rough ,N,N,Smooth ,Low Bright ,Slightly green ,-,Oblique 
+Tape 6,Clear ,Circular bubbles,Wide ,-,Smooth ,N,Y,Smooth ,Bright ,Slightly green ,-,Oblique 
+Tape 8,Matte,Large and small circular bubbles,Wide ,-,Rough ,Y,N,Smooth ,Low Bright ,Green ,-,Parallel 
+Tape 9,Clear ,Many grooves and bubbles ,Narrow,Pink/Green ,Smooth ,Y,N,Smooth ,High Bright ,Pink/Yellow,BOPP ,Parallel 
+Tape 10,Clear ,Minimal surface features ,Wide ,Purple/Green ,Smooth ,Y,N,Smooth ,High Bright ,Green ,BOPP ,Oblique 
+Tape 11,Clear ,Circular bubbles,Wide ,Brown ,Smooth ,N,Y,Smooth ,Bright ,Green ,-,Symmetric 
+Tape 12,Clear ,Many grooves ,Wide ,Pink/Green/Yellow/Purple/Blue,Smooth ,N,Y,Irregular ,High Bright ,Pink/Yellow/Bright Blue/Turquoise,-,Parallel 
+Tape 13,Matte,Rough ,Wide ,-,Rough ,N,N,Smooth ,Low Bright ,Green ,-,Parallel
+Tape 14,Off-white Matte,Rough ,Wide ,Slightly Pink ,Rough ,N,N,Irregular ,Bright,Light Green ,-,Parallel 
+Tape 15,Off-white Matte,Rough ,Wide ,Pink,Rough ,N,N,Smooth ,Bright,Yellow/Gold,-,Oblique
+Tape 16,Clear ,Some small bubbles,Wide ,Blue/Pink ,Smooth ,N,Y,Irregular ,High Bright ,Light Green ,-,Oblique 
+Tape 17,Off-white Matte,Rough ,Wide ,Pink ,Rough ,N,N,Smooth ,Bright ,Yellow/Gold,-,Parallel
+Tape 18,Clear ,Minimal surface features ,Wide ,Pink/Red/Orange,Smooth ,N,N,Irregular ,High Bright ,Yellow/Green,-,Parallel
+Tape 19,Clear ,Large bubble and Irregular bubbles,Narrow,Brown ,Smooth ,Y,N,Smooth ,Bright ,Green ,-,Parallel
+Tape 20,Clear ,Minimal surface features ,Wide ,Purple/Blue,Smooth ,N,N,Irregular ,High Bright ,Orange,-,Parallel
+Tape 21,Matte,Rough ,Wide ,-,Rough ,N,N,Smooth ,Dark ,Light Green ,-,Oblique 
+Tape 22,Clear ,Grooves (water-like),Narrow,Slightly Pink ,Smooth ,Y,N,Smooth ,High Bright ,Light Green ,-,Symmetrical
+Tape 23,Matte,Rough ,Wide ,High Pink ,Rough ,N,N,Irregular ,Bright ,Yellow,-,Oblique
